@@ -75,11 +75,11 @@ def land_layers(trim_to_30m):
     in_ura = ura_idx > 0
     if not set(np.unique(world[in_ura])).issubset(WORLD_CLASSES):
         raise ValueError("WorldCover contains an unclassified area or unexpected class within URA")
-    return ds_transform, in_ura & (world != 80), in_ura & (esri_values != 1), ura_idx
+    return ds_transform, in_ura & (world != 80), in_ura & (esri_values != 1), ura_idx, esri_values
 
 
 def spatial_grid():
-    ds_transform, world, esri, ura_idx = land_layers(trim_to_30m=True)
+    ds_transform, world, esri, ura_idx, _ = land_layers(trim_to_30m=True)
     h, w = ura_idx.shape
     # Store the nine 10 m centers for each 30 m cell so we can credit each area to its
     # own planning area at boundaries.
@@ -101,13 +101,13 @@ def spatial_grid():
     )
 
 
-def native_window(url, public_signature, bounds, fill):
+def native_window(url, public_signature, bounds, fill, dtype="uint16"):
     location = urlsplit(url)
     if location.scheme != "https" or location.netloc != "landsateuwest.blob.core.windows.net":
         raise ValueError("Unexpected Landsat asset provider")
     try:
         with rasterio.Env(**READ_ENV), rasterio.open("/vsicurl/" + url + "?" + public_signature) as ds:
-            if (ds.count != 1 or ds.dtypes[0] != "uint16" or ds.res != (30, 30)
+            if (ds.count != 1 or ds.dtypes[0] != dtype or ds.res != (30, 30)
                     or ds.crs is None or ds.crs.to_epsg() != 32648):
                 raise ValueError(f"Unexpected Landsat raster format for {Path(location.path).name}")
             rough = from_bounds(*bounds, transform=ds.transform)
@@ -142,7 +142,7 @@ def masked_scene(scene, public_signature, grid_transform, extent):
 
 
 def native_footprints(selected, signature, output):
-    transform, world_land, esri_land, ura = land_layers(trim_to_30m=False)
+    transform, world_land, esri_land, ura, _ = land_layers(trim_to_30m=False)
     bounds = array_bounds(*ura.shape, transform)
     area_totals = np.bincount(ura[world_land], minlength=56)[1:]
     hits = np.zeros(ura.shape, dtype=np.uint8)
