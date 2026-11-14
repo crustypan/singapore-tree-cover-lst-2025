@@ -23,6 +23,32 @@
   "passes_24_days_alone_pct": 0.0,
   "passes_9_months_alone_pct": 0.0,
   "passes_2_days_each_quarter_alone_pct": 0.0,
+  "quarterly_coverage": [
+    {
+      "quarter": 1,
+      "source_days_missing": 2,
+      "at_least_two_accepted_days_pct": 5.383460886330068,
+      "at_least_two_days_upper_bound_pct": 100.0
+    },
+    {
+      "quarter": 2,
+      "source_days_missing": 0,
+      "at_least_two_accepted_days_pct": 8.875067504078231,
+      "at_least_two_days_upper_bound_pct": 8.875067504078231
+    },
+    {
+      "quarter": 3,
+      "source_days_missing": 92,
+      "at_least_two_accepted_days_pct": 0.0,
+      "at_least_two_days_upper_bound_pct": 100.0
+    },
+    {
+      "quarter": 4,
+      "source_days_missing": 62,
+      "at_least_two_accepted_days_pct": 16.62443833808184,
+      "at_least_two_days_upper_bound_pct": 100.0
+    }
+  ],
   "worldcover_land_eligible_pct": 0.0,
   "worldcover_land_eligible_upper_bound_pct": 7.702607756464999,
   "esri_land_eligible_pct": 0.0,

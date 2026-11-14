@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from audit_coverage import screen_modis, temporal_eligibility
+from audit_coverage import annual_bounds, screen_modis, temporal_eligibility
 
 
 class CoverageRules(unittest.TestCase):
@@ -35,6 +35,16 @@ class CoverageRules(unittest.TestCase):
         np.testing.assert_array_equal(months, [11, 10, 8, 12])
         np.testing.assert_array_equal(quarters[:, 0], [8, 9, 5, 2])
         np.testing.assert_array_equal(kept, [True, False, False, False])
+
+    def test_missing_dates_cannot_fix_a_measured_quarter(self):
+        months = np.zeros((12, 1, 2), dtype=int)
+        months[3, 0, 0] = 2
+        months[4, 0, 0] = 1
+        missing = np.array([1, 5, 5, 0, 0, 0, 5, 5, 5, 5, 5, 5])
+        area = np.array([[1, 9]])
+        self.assertEqual(annual_bounds(months, missing, area), (0.0, 10.0, "fail"))
+        self.assertEqual(annual_bounds(months, missing, np.array([[9, 1]])),
+                         (0.0, 90.0, "incomplete_source"))
 
 
 if __name__ == "__main__":

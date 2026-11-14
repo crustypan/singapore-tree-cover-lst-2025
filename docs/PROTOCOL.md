@@ -15,11 +15,11 @@ The geographic boundary is the URA Master Plan 2025 Planning Area Boundary (No S
 - A land-cover cell is usable if at least 80% of its Esri non-water candidate area has a valid class. Fractions of trees and built area use the classified non-water area of the cell as denominator. Record water, cloud and missing area explicitly.
 - Leave the research question, year, scale and thresholds in place unless the applicant approves a change after seeing the measurements.
 
-The daily calendar uses the date of the source MOD11A1 granule. Separate gaps in dated file availability from observed days on which no cell passes QA. Use the source CRS and affine transform for all grid alignment. Count and add up the monthly and quarterly observations from the accepted daily values.
+The daily calendar uses the date of the source MOD11A1 granule. Separate gaps in dated file availability from observed days on which no cell passes QA. Use the source CRS and affine transform for all grid alignment. Count and add up the monthly and quarterly observations from the accepted daily values. When dates are missing, evaluate the area rule at both extremes, first adding zero qualifying observations for those dates and then adding one to every cell on each missing date. The resulting lower and upper bounds apply because each temporal rule is monotone in the daily QA count.
 
 ## Land-area calculation
 
-The pipeline samples categorical inputs by nearest neighbor on a finer grid nested within each MODIS cell. It rasterizes the URA boundary by fine-pixel center and sums equal-area fine-pixel counts per MODIS cell. It uses WorldCover class 80 as the primary water mask and Esri class 1 as the alternative. The land-cover audit also counts the classes directly on Esri's native 10 m UTM grid. A native scale would introduce multiple records of the same daily temperature if its temperature were copied onto smaller cells.
+The pipeline samples categorical inputs by nearest neighbor on a finer grid nested within each MODIS cell. It rasterizes the URA boundary by fine-pixel center and sums equal-area fine-pixel counts per MODIS cell. It uses WorldCover class 80 as the primary water mask and Esri class 1 as the alternative. The land-cover audit also counts the classes directly on Esri's native 10 m UTM grid. All daily temperature records retain their native cell IDs.
 
 ## Analysis after the quality decision
 
@@ -31,6 +31,6 @@ Daytime satellite LST measures the radiating surface at Terra overpass times. Cl
 
 ## Starting evidence
 
-The applicant's handoff records 89.985% annual Landsat coverage with the primary land mask after excluding the anomalous Tier 2 scene `LC09_L2SP_125059_20250127_02_T2`. The Landsat threshold was 90%. The handoff records roughly 22 valid days at the best-observed pixel in the original MODIS export and a corrected diagnosis of zero pixels meeting the temporal thresholds. The original rasters, scripts and full protocols were unavailable in the local locations searched. These figures describe earlier work and are distinct from measurements produced by this repository.
+The applicant's handoff records 89.985% annual Landsat coverage with the primary land mask after excluding the anomalous Tier 2 scene `LC09_L2SP_125059_20250127_02_T2`. The Landsat threshold was 90%. The handoff records roughly 22 valid days at the best-observed pixel in the original MODIS export and a corrected diagnosis of zero pixels meeting the temporal thresholds. The original rasters, scripts and full protocols were unavailable in the local locations searched. These figures describe earlier work. See [feasibility results](FEASIBILITY.md) for the measurements produced by this repository.
 
 The applicant selected the subject and the subsequent MODIS feasibility check, accepted the nominal MODIS spatial scale, and supplied the history of the original Earth Engine export. Codex assisted with source checking, implementation, execution and writing. Record any later applicant work as it is performed.

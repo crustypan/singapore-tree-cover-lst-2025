@@ -1,0 +1,4 @@
+nested_subdivisions,nested_spacing_m,worldcover_land_area_km2,land_with_any_qa_pct,worldcover_land_eligible_pct,worldcover_land_eligible_upper_bound_pct,esri_candidate_land_in_classified_cells_pct,annual_decision
+50,18.53250866278332,705.504064860643,35.826244009064595,0.0,7.699991967460915,100.0,fail
+100,9.26625433139166,705.6278799834226,35.82898658582321,0.0,7.702607756464999,100.0,fail
+200,4.63312716569583,705.6144852822065,35.8293320918107,0.0,7.702848282023582,100.0,fail

@@ -252,6 +252,20 @@ def percentage(mask, weight):
     return float(100 * weight[mask].sum() / weight.sum())
 
 
+def annual_bounds(month_days, missing_days, world_land):
+    _, _, _, observed = temporal_eligibility(month_days)
+    _, _, _, possible = temporal_eligibility(month_days + missing_days[:, None, None])
+    lower = percentage(observed, world_land)
+    upper = percentage(possible, world_land)
+    if lower >= 100 * MIN_ANNUAL_AREA:
+        status = "pass"
+    elif upper < 100 * MIN_ANNUAL_AREA:
+        status = "fail"
+    else:
+        status = "incomplete_source"
+    return lower, upper, status
+
+
 def render_quality(path, boundary, transform, esri_cloud, world_land, counts, daily, source):
     plt.rcParams.update({
         "font.family": "DejaVu Sans", "font.size": 10, "axes.spines.top": False,
@@ -324,22 +338,13 @@ def audit(args):
     has_land = world_land > 0
     land_area = world_land.sum() * (transform.a / args.subdivisions) ** 2 / 1e6
     pixel_area = (transform.a / args.subdivisions) ** 2
-    cover_good = (esri_land > 0) & (5 * cover["esri_valid"] >= 4 * esri_land)
-    pct = percentage(eligible, world_land)
+    cover_good = (esri_land > 0) & (cover["esri_valid"] >= MIN_CLASSIFIED * esri_land)
     missing_days = np.array([
         calendar.monthrange(2025, month)[1] - np.count_nonzero(months_of_dates == month)
         for month in range(1, 13)
     ])
-    _, _, _, potentially_eligible = temporal_eligibility(
-        month_days + missing_days[:, None, None]
-    )
-    upper_pct = percentage(potentially_eligible, world_land)
-    if pct >= 100 * MIN_ANNUAL_AREA:
-        status = "pass"
-    elif upper_pct < 100 * MIN_ANNUAL_AREA:
-        status = "fail"
-    else:
-        status = "incomplete_source"
+    pct, upper_pct, status = annual_bounds(month_days, missing_days, world_land)
+    quarter_missing = missing_days.reshape(4, 3).sum(axis=1)
     audit_stats = {
         "year": 2025, "temperature_source": source, "annual_decision": status,
         "input_sha256": {path.name: checksum(path) for path in (
@@ -359,6 +364,14 @@ def audit(args):
         "passes_24_days_alone_pct": percentage(valid_days >= MIN_DAYS, world_land),
         "passes_9_months_alone_pct": percentage(valid_months >= MIN_MONTHS, world_land),
         "passes_2_days_each_quarter_alone_pct": percentage((quarters >= MIN_QUARTER_DAYS).all(axis=0), world_land),
+        "quarterly_coverage": [
+            {
+                "quarter": int(i + 1), "source_days_missing": int(missing),
+                "at_least_two_accepted_days_pct": percentage(observed >= MIN_QUARTER_DAYS, world_land),
+                "at_least_two_days_upper_bound_pct": percentage(observed + missing >= MIN_QUARTER_DAYS, world_land),
+            }
+            for i, (observed, missing) in enumerate(zip(quarters, quarter_missing))
+        ],
         "worldcover_land_eligible_pct": pct,
         "worldcover_land_eligible_upper_bound_pct": upper_pct,
         "esri_land_eligible_pct": percentage(eligible, esri_land),
