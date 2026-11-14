@@ -50,4 +50,4 @@ The repeat coverage argues for retaining partially observed cells and comparing 
 
 ## Scope decision
 
-The candidate dates can support a separate question about the spatial relationship on selected clear-sky Landsat overpasses in 2025, initially at an approximate 500 m grid. The full-year option requires resolving the small Landsat coverage discrepancy before applying the inherited rules or qualifying an alternative source. Both choices preserve the observational character of the question. Model fitting depends on the applicant's selection of scope.
+The applicant selected the seven Landsat acquisitions and an approximately 500 m grid. See the [selected-date research report](REPORT.md) for the completed analysis. The annual feasibility evidence is retained as the record of the scope decision.

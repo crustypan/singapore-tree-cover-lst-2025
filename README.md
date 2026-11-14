@@ -1,20 +1,28 @@
 # Tree cover and daytime land surface temperature in Singapore
 
-How does daytime satellite land surface temperature vary with the share of land classified as trees? Does the observed relationship differ with the share classified as built area? This project investigates the question for Singapore using 2025 satellite measurements. The current milestone is a geospatial data feasibility study.
+This study uses seven clear-sky Landsat 8/9 overpasses in 2025 to ask whether parts of Singapore with more tree cover had cooler daytime surfaces, and whether the association varied with built-area cover. It combines 10 m land-cover classifications and Landsat surface-temperature measurements on a 500 m grid.
 
-## What the data support
+## Results
 
-- **Terra MODIS annual route.** None of the observed land meets the prespecified temporal rules. Even if every missing source date passes QA at every cell, at most **7.70%** of the WorldCover land meets all temporal rules. The annual threshold is 80%.
-- **2025 land cover.** The Esri map classifies **99.979%** of non-water pixels in the study boundary. The official legend and the original GeoTIFF identify 535,005 pixels as rangeland and 1,478 as cloud.
-- **Landsat candidate dates.** Seven dates pass Tier 1 per-scene screening and cover **62.96% to 86.00%** of land individually. Their spatial union is sensitive near the original annual coverage threshold.
+The main analysis uses **14,678 observations across 2,491 grid cells**. At 50% built-area cover, cells with 10 percentage points more tree cover had **0.73 °C lower daytime land surface temperature** on average within an overpass, with an approximate 95% spatial-bootstrap interval of **0.61 to 0.82 °C lower**.
 
-![Singapore data availability and MODIS QA maps](results/modis_public_mirror/data_quality.png)
+The estimated tree association was stronger at higher built-area shares in the linear interaction model. Adding separate quadratic terms for tree and built-area cover made the interaction less certain. The interval included zero in the quadratic model. The negative tree association held across the dates and coverage, mask, grid and model checks.
 
-[Feasibility results and limitations](docs/FEASIBILITY.md) · [Study protocol](docs/PROTOCOL.md) · [Source attribution and licences](docs/DATA_SOURCES.md)
+![Observed tree cover and daytime LST on 2 October alongside the model-adjusted slopes across seven overpasses](results/landsat_analysis/figures/tree_cover_association.png)
+
+The observations describe land surface temperature around **11:16 a.m. Singapore time** on the seven selected dates. The estimates are observational and do not establish causal cooling. They describe satellite surface temperature for the sampled overpasses. Air temperature, night conditions, and individual heat exposure require distinct measurements.
+
+## How the sample was built
+
+1. The feasibility study tested 2025 Terra MODIS coverage against existing annual rules. Even assuming every missing source date passed QA, at most 7.70% of land could meet the temporal rules against an 80% requirement. [Feasibility report](docs/FEASIBILITY.md)
+2. The Landsat audit screened 44 Collection 2 scenes. Seven Tier 1 acquisitions passed the per-scene coverage and temperature checks. The study uses those seven acquisitions. [Scene-level checks](results/landsat_screening/scene_coverage.csv) · [Selected acquisitions and source bands](data/selected_landsat_scenes.csv)
+3. The analysis aggregated the original Landsat pixel footprints to 500 m squares using land area and fit a model with date effects, tree and built fractions, their interaction, and the fraction of each square occupied by study land. Blocks of 4 km preserved nearby and repeated measurements when building intervals. [Analysis plan](docs/LANDSAT_ANALYSIS_PLAN.md)
+
+[Read the full research report](docs/REPORT.md) · [Coverage and residual maps](results/landsat_analysis/figures/landsat_maps.png) · [Acquisition-level checks](results/landsat_analysis/figures/date_estimates.png) · [Data sources and licences](docs/DATA_SOURCES.md)
 
 ## Reproduce
 
-The pipeline was run on Linux x86-64 with Python 3.10.12. Run the following from the repository root in an environment that can reach the publishers' public HTTPS data endpoints.
+The analysis ran on Linux x86-64 and Python 3.10.12. Run these commands from the repository root. Embedded snapshot tables provide a fixed model input.
 
 ```bash
 python3 -m venv .venv
@@ -25,21 +33,24 @@ export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 GDAL_NUM_THREADS=1
 .venv/bin/python -m pip install -r requirements-lock.txt
 .venv/bin/python -m pip check
 PYTHONPATH=scripts .venv/bin/python -B -m unittest discover -s tests -v
-.venv/bin/python -B scripts/fetch_inputs.py spatial
-.venv/bin/python -B scripts/fetch_inputs.py modis
-.venv/bin/python -B scripts/audit_coverage.py --output .scratch/reproduced-modis
-.venv/bin/python -B scripts/screen_landsat.py --output .scratch/reproduced-landsat
+.venv/bin/python -B scripts/analyze_landsat.py \
+  --panels data/snapshot/landsat_panels --output .scratch/reproduced-analysis
 ```
 
-To use the MODIS files from the original snapshot, replace the MODIS fetch command with the following two copies. The dated inventory in the archived results records the exact source granules used.
+To regenerate the 500 m inputs from the public source rasters and draw the figures, run the following after setup. The manifest fixes all seven product IDs and band locations.
 
 ```bash
-cp data/snapshot/modis_public_daily.npz data/raw/
-cp results/modis_public_mirror/source_inventory.csv data/raw/modis_public_daily_inventory.csv
+.venv/bin/python -B scripts/fetch_inputs.py spatial
+.venv/bin/python -B scripts/make_landsat_panel.py \
+  --scene-manifest data/selected_landsat_scenes.csv --output data/processed/landsat
+.venv/bin/python -B scripts/analyze_landsat.py \
+  --panels data/processed/landsat --output .scratch/reproduced-from-rasters
+.venv/bin/python -B scripts/plot_landsat.py --panels data/processed/landsat \
+  --results .scratch/reproduced-from-rasters --figures .scratch/reproduced-figures
 ```
 
-The scope, quality criteria and rules for missing dates are documented in the protocol. `coverage.json`, the per-cell table and the daily and monthly tables provide the audit trail. Landsat has a separate 44-scene screening table. The [optional Earth Engine export](docs/MODIS_EXPORT.md) describes an independent input check.
+The [data and outputs guide](docs/REPRODUCE.md) describes the archived files and the original MODIS and Landsat feasibility checks.
 
 ## Contributions
 
-The applicant selected the project, chose the MODIS feasibility check, and provided the documented history of the earlier data work. Codex assisted with source checks, program implementation and execution, figures, and project documentation. The temperature results reflect satellite overpasses and clear-sky conditions. The scientific interpretation is limited to the observed land surface and the scope supported by the data.
+The applicant selected the project, provided the record of the earlier data work, chose the MODIS feasibility route and approved the selected-date Landsat analysis. Codex assisted with source verification, pipeline development, execution, figures, and writing.
