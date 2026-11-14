@@ -10,7 +10,7 @@ import rasterio
 from rasterio.features import rasterize
 from rasterio.transform import Affine, array_bounds
 from rasterio.warp import Resampling, reproject, transform_geom
-from rasterio.windows import from_bounds
+from rasterio.windows import Window, from_bounds
 from shapely.geometry import mapping, shape
 from shapely.validation import make_valid
 
@@ -50,7 +50,7 @@ def catalog():
     return sorted(scenes, key=lambda scene: scene["id"])
 
 
-def spatial_grid():
+def land_layers(trim_to_30m):
     features = json.loads(BOUNDARY.read_text())["features"]
     names = sorted({f["properties"]["PLN_AREA_C"] for f in features})
     if len(names) != 55:
@@ -62,9 +62,9 @@ def spatial_grid():
         geometry = transform_geom("EPSG:4326", GRID_CRS, mapping(repaired))
         geometries.append((geometry, idx[feature["properties"]["PLN_AREA_C"]]))
     with rasterio.open(ESRI) as esri:
-        # Match an exact 30 m subdivision of the Esri grid. The 10 m source cell centers
-        # are sampled once, then used as land-area weights on each 30 m Landsat cell.
-        h, w = 3 * (esri.height // 3), 3 * (esri.width // 3)
+        h, w = esri.shape
+        if trim_to_30m:
+            h, w = 3 * (h // 3), 3 * (w // 3)
         ds_transform = esri.transform
         esri_values = esri.read(1)[:h, :w]
     world = np.zeros((h, w), dtype=np.uint8)
@@ -75,16 +75,22 @@ def spatial_grid():
     in_ura = ura_idx > 0
     if not set(np.unique(world[in_ura])).issubset(WORLD_CLASSES):
         raise ValueError("WorldCover contains an unclassified area or unexpected class within URA")
+    return ds_transform, in_ura & (world != 80), in_ura & (esri_values != 1), ura_idx
+
+
+def spatial_grid():
+    ds_transform, world, esri, ura_idx = land_layers(trim_to_30m=True)
+    h, w = ura_idx.shape
     # Store the nine 10 m centers for each 30 m cell so we can credit each area to its
     # own planning area at boundaries.
-    world_cells = (in_ura & (world != 80)).reshape(h // 3, 3, w // 3, 3)
-    esri_cells = (in_ura & (esri_values != 1)).reshape(h // 3, 3, w // 3, 3)
+    world_cells = world.reshape(h // 3, 3, w // 3, 3)
+    esri_cells = esri.reshape(h // 3, 3, w // 3, 3)
     world_weight = world_cells.sum(axis=(1, 3), dtype=np.uint8)
     esri_weight = esri_cells.sum(axis=(1, 3), dtype=np.uint8)
-    land_planning_areas = np.where(in_ura & (world != 80), ura_idx, 0)
+    land_planning_areas = np.where(world, ura_idx, 0)
     land_ids = np.nonzero(land_planning_areas.ravel())[0]
     area_codes = land_planning_areas.ravel()[land_ids]
-    area_totals = np.bincount(area_codes, minlength=len(names) + 1)[1:]
+    area_totals = np.bincount(area_codes, minlength=56)[1:]
     if np.any(area_totals == 0):
         raise ValueError("An URA planning area has no WorldCover land pixels")
     subrow, subcol = np.unravel_index(land_ids, (h, w))
@@ -95,34 +101,74 @@ def spatial_grid():
     )
 
 
-def masked_scene(scene, public_signature, grid_transform, extent):
-    results = {}
-    for key, fill in {"lwir11": 0, "qa_pixel": 1}.items():
-        url = scene["assets"][key]["href"]
-        location = urlsplit(url)
-        if location.netloc != "landsateuwest.blob.core.windows.net":
-            raise ValueError(f"Unexpected Landsat provider for {scene['id']}")
-        array = np.full(extent, fill, dtype=np.uint16)
-        try:
-            with rasterio.Env(**READ_ENV), rasterio.open("/vsicurl/" + url + "?" + public_signature) as ds:
-                if (ds.count != 1 or ds.dtypes[0] != "uint16" or ds.res != (30, 30)
-                        or ds.crs.to_epsg() != 32648):
-                    raise ValueError(f"Unexpected Landsat raster format for {scene['id']}")
-                bounds = array_bounds(*extent, grid_transform)
-                native = from_bounds(*bounds, transform=ds.transform).round_offsets().round_lengths()
-                source = ds.read(1, window=native, boundless=True, fill_value=fill)
-                reproject(source, array, src_crs=ds.crs, src_transform=ds.window_transform(native),
-                          dst_crs=GRID_CRS, dst_transform=grid_transform,
-                          resampling=Resampling.nearest, src_nodata=fill, dst_nodata=fill)
-        except rasterio.errors.RasterioError:
-            raise RuntimeError(f"Could not read {key} for {scene['id']}") from None
-        results[key] = array
-    dn, qa = results["lwir11"], results["qa_pixel"]
+def native_window(url, public_signature, bounds, fill):
+    location = urlsplit(url)
+    if location.scheme != "https" or location.netloc != "landsateuwest.blob.core.windows.net":
+        raise ValueError("Unexpected Landsat asset provider")
+    try:
+        with rasterio.Env(**READ_ENV), rasterio.open("/vsicurl/" + url + "?" + public_signature) as ds:
+            if (ds.count != 1 or ds.dtypes[0] != "uint16" or ds.res != (30, 30)
+                    or ds.crs is None or ds.crs.to_epsg() != 32648):
+                raise ValueError(f"Unexpected Landsat raster format for {Path(location.path).name}")
+            rough = from_bounds(*bounds, transform=ds.transform)
+            col, row = np.floor([rough.col_off, rough.row_off]).astype(int)
+            right, bottom = np.ceil([rough.col_off + rough.width, rough.row_off + rough.height]).astype(int)
+            native = Window(int(col), int(row), int(right - col), int(bottom - row))
+            source = ds.read(1, window=native, boundless=True, fill_value=fill)
+            return source, ds.window_transform(native)
+    except rasterio.errors.RasterioError:
+        raise RuntimeError(f"Could not read {Path(location.path).name}") from None
+
+
+def mask_values(dn, qa):
     # Bits 0–5 are fill, dilated cloud, cirrus, cloud, cloud shadow, and snow.
     valid_qa = (dn > 0) & ((qa & 63) == 0)
     temperatures = dn * SCALE + OFFSET
     plausible = (temperatures >= 15) & (temperatures <= 70)
     return valid_qa, plausible, temperatures
+
+
+def masked_scene(scene, public_signature, grid_transform, extent):
+    results = {}
+    for key, fill in {"lwir11": 0, "qa_pixel": 1}.items():
+        bounds = array_bounds(*extent, grid_transform)
+        source, transform = native_window(scene["assets"][key]["href"], public_signature, bounds, fill)
+        aligned = np.full(extent, fill, dtype=np.uint16)
+        reproject(source, aligned, src_crs=GRID_CRS, src_transform=transform,
+                  dst_crs=GRID_CRS, dst_transform=grid_transform,
+                  resampling=Resampling.nearest, src_nodata=fill, dst_nodata=fill)
+        results[key] = aligned
+    return mask_values(results["lwir11"], results["qa_pixel"])
+
+
+def native_footprints(selected, signature, output):
+    transform, world_land, esri_land, ura = land_layers(trim_to_30m=False)
+    bounds = array_bounds(*ura.shape, transform)
+    area_totals = np.bincount(ura[world_land], minlength=56)[1:]
+    hits = np.zeros(ura.shape, dtype=np.uint8)
+    per_scene = []
+    for scene in sorted(selected, key=lambda row: row["date_utc"]):
+        dn, t = native_window(scene["st_b10_source"], signature, bounds, 0)
+        qc, qc_transform = native_window(scene["qa_pixel_source"], signature, bounds, 1)
+        if t != qc_transform or dn.shape != qc.shape:
+            raise ValueError(f"ST_B10 and QA_PIXEL have different footprints for {scene['scene_id']}")
+        qa_pass, plausible, _ = mask_values(dn, qc)
+        fine = np.zeros_like(hits)
+        reproject((qa_pass & plausible).astype(np.uint8), fine, src_crs=GRID_CRS, src_transform=t,
+                  dst_crs=GRID_CRS, dst_transform=transform, resampling=Resampling.nearest)
+        hits += fine
+        areas = np.bincount(ura[world_land & (fine > 0)], minlength=56)[1:]
+        per_scene.append((scene["date_utc"], round(float(100 * fine[world_land].mean()), 8),
+                          int((10 * areas >= 3 * area_totals).sum())))
+    write_rows(output / "native_footprint_scenes.csv",
+               ("date_utc", "worldcover_land_pct", "planning_areas_at_30pct"), per_scene)
+    write_rows(
+        output / "repeat_coverage.csv", ("min_dates", "worldcover_land_pct", "esri_land_pct"),
+        [
+            (i, 100 * (hits[world_land] >= i).mean(), 100 * (hits[esri_land] >= i).mean())
+            for i in range(1, len(selected) + 1)
+        ],
+    )
 
 
 def compute_scene(scene, signature, grid):
@@ -197,6 +243,7 @@ def main():
         tmp.write_text(json.dumps(summary, indent=2) + "\n")
     print("Tier 1 candidate dates", [row["date_utc"] for row in summary["tier1_passing_raw_qa_and_temperature"]])
     print("Tier 1 screened union", summary["tier1_screened_union_worldcover_pct"])
+    native_footprints(summary["tier1_passing_raw_qa_and_temperature"], signature, args.output)
 
 
 if __name__ == "__main__":

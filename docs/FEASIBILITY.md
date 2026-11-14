@@ -37,7 +37,16 @@ The server screened 44 Landsat 8/9 Collection 2 L2SP scenes, including 37 Tier 1
 
 The 27 January Tier 2 case reproduced the earlier problem. Standard QA alone leaves 77.38% of land and 52 planning areas with at least 30% coverage. Its median is −19.03 °C and 97.44% of its QA-passing land samples fall below 15 °C. Coverage falls to 1.99% after the temperature screen.
 
-The seven Tier 1 scenes have a 90.121% spatial union under this screening implementation and 90.258% using the Esri water mask. These are one-or-more-date unions. The historical WorldCover result of 89.985% is the recorded result under the original rules and is below the 90% threshold. The new screen uses a documented 30 m analysis grid with 10 m land-area weights. The old grid and code were unavailable for a like-for-like comparison. The discrepancy of about 0.136 percentage points crosses the old threshold, so the annual coverage decision remains contingent on reproducing the prior specification. None of the unions describes how evenly the locations were observed over the year. [Per-scene data and source IDs](../results/landsat_screening/scene_coverage.csv) · [Screening summary](../results/landsat_screening/summary.json)
+The seven Tier 1 scenes have a 90.121% spatial union on the 30 m screening grid and 90.258% under the Esri water mask. Directly assigning the same 10 m land centers to the native Landsat footprints moves the WorldCover union to 90.083%. The historical WorldCover result was 89.985% under the original rules. The old grid and code were unavailable for a like-for-like comparison. The two reprocessed estimates are on one side of the 90% threshold and the historical estimate is on the other. The annual coverage decision remains contingent on reproducing the original specification.
+
+| Minimum number of passing dates on native Landsat footprints | WorldCover land |
+| ---: | ---: |
+| 1 | 90.08% |
+| 3 | 89.74% |
+| 5 | 79.24% |
+| 7 | 34.35% |
+
+The repeat coverage argues for retaining partially observed cells and comparing a complete-date subset as a separate sensitivity analysis if a selected-date study is authorized. Other date-level checks could include cloud distance, product-reported temperature uncertainty, and changing the land-cover mask. [Per-scene data and source IDs](../results/landsat_screening/scene_coverage.csv) · [Direct footprint results](../results/landsat_screening/native_footprint_scenes.csv) · [Repeat coverage](../results/landsat_screening/repeat_coverage.csv)
 
 ## Scope decision
 
