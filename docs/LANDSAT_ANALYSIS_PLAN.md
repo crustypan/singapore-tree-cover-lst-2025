@@ -21,9 +21,10 @@ Resample nonoverlapping 4 km square blocks with replacement. Keep all observatio
 ## Robustness checks
 
 - Change cell-date QA area from 60% to 40% and 80%.
-- Require explicit cloud distance of at least 0.5 km and ST_QA at most 2 K, and compare filtering on a common sample.
+- Require explicit cloud distance of at least 0.5 km and ST_QA at most 2 K, and compare filtering on a common sample. Record the empty-sample outcome if the rule leaves no observations. A separate 4 K screen is exploratory and was added after checking the ST_QA values without using regression coefficients.
 - Recompute with the Esri water mask, a 90% minimum cell land share, a 250 m shift of the 500 m grid, and an aligned 1 km grid.
 - Compare a balanced seven-date sample, equal total weight per spatial cell, and a fit with 4 km spatial-block intercepts.
 - Compare fixed land-cover fractions to fractions measured on the part of each cell observed on each date. Use these comparisons to diagnose potential within-cell selection.
+- After inspecting the linear fit, also examine an exploratory model with separate squared terms for tree and built fractions and an exploratory refit omitting each date's outer 1% of LST on each side. These checks assess whether nonlinear main effects or temperature extremes could account for the fitted interaction. The quadratic model reports the local tree slope at 10% trees.
 
 The observations measure radiating surface temperature under usable clear-sky conditions. The analysis does not identify a causal cooling effect or quantify air temperature, nighttime conditions, or human heat exposure. Interpret regional differences with possible confounding from geography, urban morphology, shade, water, and other influences. The dates were selected for usable satellite coverage and cannot characterize the full year.

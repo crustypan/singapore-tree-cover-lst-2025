@@ -144,24 +144,30 @@ def aggregate(path, manifest, grid_size, shift, land_mask, data, cache):
         qa_pass, plausible, t = mask_values(dn, qa_pixel)
         passing = qa_pass & plausible
         strict = passing & (cdist >= 50) & (stqa >= 0) & (stqa <= 200)
+        lower_uncertainty = passing & (cdist >= 50) & (stqa >= 0) & (stqa <= 400)
         valid_class_obs = passing & valid_class
         usable = counts_per_cell(indices, passing, size)
         strict_usable = counts_per_cell(indices, strict, size)
+        lower_uncertainty_count = counts_per_cell(indices, lower_uncertainty, size)
         obs_classified = counts_per_cell(indices, valid_class_obs, size)
         obs_tree = fractions(counts_per_cell(indices, passing & tree, size), obs_classified)
         obs_built = fractions(counts_per_cell(indices, passing & built, size), obs_classified)
         tv = fractions(np.bincount(indices[passing], weights=t[passing], minlength=size), usable)
         ts = fractions(np.bincount(indices[strict], weights=t[strict], minlength=size), strict_usable)
+        tu = fractions(np.bincount(indices[lower_uncertainty], weights=t[lower_uncertainty], minlength=size),
+                       lower_uncertainty_count)
         coverage = fractions(usable, land)
         strict_cover = fractions(strict_usable, land)
-        if (strict_usable > usable).any() or (usable > land).any():
+        uncertainty_cover = fractions(lower_uncertainty_count, land)
+        if (strict_usable > lower_uncertainty_count).any() or (lower_uncertainty_count > usable).any() or (usable > land).any():
             raise ValueError("QA-filtered counts exceed the corresponding candidate areas")
         date = scene["datetime_utc"][:10]
         for j, (easting, northing) in enumerate(centers):
             records.append((date, scene["scene_id"], ids[j], easting, northing, land[j], classified[j],
                             land_share[j], classified_share[j], fixed_tree[j], fixed_built[j], usable[j],
                             coverage[j], tv[j], strict_usable[j], strict_cover[j], ts[j],
-                            obs_classified[j], obs_tree[j], obs_built[j]))
+                            obs_classified[j], obs_tree[j], obs_built[j], lower_uncertainty_count[j],
+                            uncertainty_cover[j], tu[j]))
     with atomic_target(path) as tmp, tmp.open("w", newline="") as out:
         writer = csv.writer(out, lineterminator="\n")
         writer.writerow((
@@ -169,6 +175,7 @@ def aggregate(path, manifest, grid_size, shift, land_mask, data, cache):
             "classified_centers", "land_share", "classified_share", "tree_fraction", "built_fraction",
             "valid_lst_centers", "valid_lst_share", "lst_c", "strict_lst_centers", "strict_lst_share",
             "strict_lst_c", "observed_classified_centers", "observed_tree_fraction", "observed_built_fraction",
+            "qa4_lst_centers", "qa4_lst_share", "qa4_lst_c",
         ))
         for record in records:
             writer.writerow([

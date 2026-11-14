@@ -1,0 +1,133 @@
+{
+  "study_dates": [
+    "2025-01-03",
+    "2025-02-04",
+    "2025-05-03",
+    "2025-07-06",
+    "2025-10-02",
+    "2025-10-18",
+    "2025-12-05"
+  ],
+  "seed": 20251115,
+  "sample": {
+    "cells_intersecting_primary_land": 3501,
+    "spatially_eligible_cells": 2788,
+    "eligible_with_zero_usable_dates": 297,
+    "usable_all_seven_dates": 899,
+    "total_worldcover_land_km2": 702.1541,
+    "sampled_worldcover_land_km2": 593.3787
+  },
+  "primary_fit": {
+    "rows": 14678,
+    "cells": 2491,
+    "dates": 7,
+    "spatial_blocks": 78,
+    "bootstrap_draws_retained": 1999,
+    "rank": 11,
+    "condition_number": 243.06030950813422,
+    "rmse_c": 2.3893548424457607,
+    "within_date_r2": 0.6281123387805325,
+    "tree_fraction_at_slope": null,
+    "coefficients": {
+      "intercept_reference_date": 39.79097056255987,
+      "tree_at_50pct_built": -0.7269856785205009,
+      "built_at_reference_tree_fraction": 0.3249410516892763,
+      "full_land_share": 2.0830148722528863,
+      "change_in_tree_slope_per_10pp_built": -0.04188603526325699,
+      "date_2025-02-04": -9.941968610982311,
+      "date_2025-05-03": -5.909400115936463,
+      "date_2025-07-06": -1.252204629499789,
+      "date_2025-10-02": 3.4391469059163806,
+      "date_2025-10-18": 0.7603597116025494,
+      "date_2025-12-05": 0.4122122736139065
+    },
+    "interaction": {
+      "estimate_c": -0.04188603526325699,
+      "lower_c": -0.06014850271171771,
+      "upper_c": -0.025985218960503317
+    },
+    "slopes": [
+      {
+        "built_fraction": 0.25,
+        "estimate_c": -0.6222705903623584,
+        "lower_c": -0.698700966440927,
+        "upper_c": -0.529890904622965
+      },
+      {
+        "built_fraction": 0.5,
+        "estimate_c": -0.7269856785205009,
+        "lower_c": -0.8239169110693815,
+        "upper_c": -0.612847665433833
+      },
+      {
+        "built_fraction": 0.75,
+        "estimate_c": -0.8317007666786433,
+        "lower_c": -0.9637507843649629,
+        "upper_c": -0.6916397078977333
+      }
+    ]
+  },
+  "tree_only_fit": {
+    "rows": 14678,
+    "cells": 2491,
+    "dates": 7,
+    "spatial_blocks": 78,
+    "bootstrap_draws_retained": 1999,
+    "rank": 8,
+    "condition_number": 30.240893575499168,
+    "rmse_c": 2.4940463318035784,
+    "within_date_r2": 0.5948092705054164,
+    "tree_fraction_at_slope": null,
+    "coefficients": {
+      "intercept_reference_date": 42.97989341479717,
+      "tree_at_50pct_built": -0.8666176802502696,
+      "date_2025-02-04": -9.858289710633251,
+      "date_2025-05-03": -5.85394968908698,
+      "date_2025-07-06": -1.2396484946859874,
+      "date_2025-10-02": 3.4438082772583747,
+      "date_2025-10-18": 0.8002787112724935,
+      "date_2025-12-05": 0.41080179006610557
+    },
+    "slopes": [
+      {
+        "built_fraction": 0.5,
+        "estimate_c": -0.8666176802502696,
+        "lower_c": -0.9320056492598272,
+        "upper_c": -0.8049112386892373
+      }
+    ]
+  },
+  "additive_fit": {
+    "rows": 14678,
+    "cells": 2491,
+    "dates": 7,
+    "spatial_blocks": 78,
+    "bootstrap_draws_retained": 1999,
+    "rank": 10,
+    "condition_number": 65.90427539896733,
+    "rmse_c": 2.4068813896056476,
+    "within_date_r2": 0.6226365410485581,
+    "tree_fraction_at_slope": null,
+    "coefficients": {
+      "intercept_reference_date": 39.85493049015401,
+      "tree_at_50pct_built": -0.5609467440959293,
+      "built_at_reference_tree_fraction": 0.3127261467687569,
+      "full_land_share": 1.9506807233771526,
+      "date_2025-02-04": -9.951622761907718,
+      "date_2025-05-03": -5.904530270933155,
+      "date_2025-07-06": -1.237444371412718,
+      "date_2025-10-02": 3.4435657036330656,
+      "date_2025-10-18": 0.7478719215236903,
+      "date_2025-12-05": 0.4192573564653818
+    },
+    "slopes": [
+      {
+        "built_fraction": 0.5,
+        "estimate_c": -0.5609467440959293,
+        "lower_c": -0.6394811518519407,
+        "upper_c": -0.47145818424404445
+      }
+    ]
+  },
+  "tree_built_pearson_cell_level": -0.8538108040346934
+}
