@@ -95,6 +95,29 @@ def spatial_window(dataset):
     return Window(int(col), int(row), int(right - col), int(bottom - row))
 
 
+def fetch_esri_window(url, destination):
+    if destination.is_file():
+        return
+    with rasterio.Env(**READ_ENV), rasterio.open("/vsicurl/" + url) as ds:
+        if (
+            ds.count != 1
+            or ds.crs.to_epsg() != 32648
+            or ds.dtypes[0] != "uint8"
+            or ds.res != (10.0, 10.0)
+        ):
+            raise ValueError("Unexpected Esri 48N product format")
+        window = spatial_window(ds)
+        profile = {
+            "driver": "GTiff", "width": int(window.width), "height": int(window.height),
+            "count": 1, "dtype": ds.dtypes[0], "crs": ds.crs,
+            "transform": ds.window_transform(window), "nodata": ds.nodata, "compress": "deflate",
+        }
+        with atomic_target(destination) as tmp, rasterio.open(tmp, "w", **profile) as out:
+            out.write(ds.read(1, window=window), 1)
+            out.write_colormap(1, ds.colormap(1))
+            out.update_tags(source_url=url)
+
+
 def fetch_spatial():
     boundary = RAW / "ura_planning_area_no_sea_2025.geojson"
     world = RAW / WORLD_FILE
@@ -114,25 +137,7 @@ def fetch_spatial():
             with rasterio.open(tmp) as ds:
                 if ds.count != 1 or ds.crs.to_epsg() != 4326 or ds.dtypes[0] != "uint8":
                     raise ValueError("Unexpected WorldCover tile format")
-    if not esri.is_file():
-        with rasterio.Env(**READ_ENV), rasterio.open("/vsicurl/" + ESRI_URL) as ds:
-            if (
-                ds.count != 1
-                or ds.crs.to_epsg() != 32648
-                or ds.dtypes[0] != "uint8"
-                or ds.res != (10.0, 10.0)
-            ):
-                raise ValueError("Unexpected Esri 48N product format")
-            window = spatial_window(ds)
-            profile = {
-                "driver": "GTiff", "width": int(window.width), "height": int(window.height),
-                "count": 1, "dtype": ds.dtypes[0], "crs": ds.crs,
-                "transform": ds.window_transform(window), "nodata": ds.nodata, "compress": "deflate",
-            }
-            with atomic_target(esri) as tmp, rasterio.open(tmp, "w", **profile) as out:
-                out.write(ds.read(1, window=window), 1)
-                out.write_colormap(1, ds.colormap(1))
-                out.update_tags(source_url=ESRI_URL)
+    fetch_esri_window(ESRI_URL, esri)
     for path, url in [(boundary, URA_URL), (world, WORLD_URL), (esri, ESRI_URL)]:
         print(f"{path.name}  {checksum(path)}  {url}", flush=True)
 

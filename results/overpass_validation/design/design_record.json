@@ -1,0 +1,48 @@
+{
+  "validation_years": [
+    2023,
+    2024
+  ],
+  "discovery_year": 2025,
+  "cover_stability_max_pp": 5,
+  "stage2_contrast": {
+    "tree_start_pct": 2.5,
+    "tree_end_pct": 12.5,
+    "lower_built_pct": 65,
+    "higher_built_pct": 85
+  },
+  "scene_ids": [
+    "LC09_L2SP_125059_20230412_02_T1",
+    "LC08_L2SP_125059_20230522_02_T1",
+    "LC08_L2SP_125059_20230725_02_T1",
+    "LC08_L2SP_125059_20230927_02_T1",
+    "LC09_L2SP_125059_20231005_02_T1",
+    "LC08_L2SP_125059_20231013_02_T1",
+    "LC09_L2SP_125059_20240313_02_T1",
+    "LC09_L2SP_125059_20241023_02_T1"
+  ],
+  "dates": [
+    "2023-04-12",
+    "2023-05-22",
+    "2023-07-25",
+    "2023-09-27",
+    "2023-10-05",
+    "2023-10-13",
+    "2024-03-13",
+    "2024-10-23"
+  ],
+  "discovery_panel_sha256": "1714ed37bdc20077186b15d9817c48498d221401c2fb8dacdf99547c35ce1792",
+  "audit_sha256": {
+    "2023": "2e8a669ece2d68f51e68cf83cf6dff4d28949c4c0ac3b809dd063a5d62ca91b8",
+    "2024": "9e9f4362c74e09d46dc9d51db68ce469cdcbc4fbddc3bb7c405fe172cb51426b",
+    "2025": "b571bfe9b8c2aa98a91149fdfa0e919814c61465d9b236371712e21e5aee0ca0"
+  },
+  "design_sha256": {
+    "annual_cover_comparison.csv": "d5bdf9eb2f4b5015f48cbe5245f8f39d360d5f2e895deac0f00063152998bebe",
+    "eligible_cell_dates.csv": "18eb1a5d1823eb229830afe0cfb253e63b977df84585e2380b803617173f1b4b",
+    "sample_support.csv": "c2c0c1e95a2b221091f7625c51ffb883f12c0879480946c22f9f1bb2e904fc77",
+    "stage1_pairs.csv": "d4606419a17d57b4fdb1a3c0f785a3d5df0247c6815f927f2427bc214dd6ef21",
+    "stage2_fit_sample.csv": "df71d48fc14f41174b170822796b501717fb85d38db5e313abcac16b989404f1",
+    "validation_scenes.csv": "bd059bfc19845a6e77f5e0e5a11b6e405b6cb1bf7d05312ca442074aa735788f"
+  }
+}

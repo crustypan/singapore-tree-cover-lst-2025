@@ -14,14 +14,14 @@ CHECK_DRAWS = 999
 BUILT_LEVELS = (0.25, 0.50, 0.75)
 
 
-def load_panel(directory, grid):
+def load_panel(directory, grid, dates=DATES):
     path = directory / (grid + ".csv")
     if not path.is_file():
         path = path.with_suffix(".csv.gz")
     data = pd.read_csv(path, float_precision="round_trip")
-    if data.duplicated(["cell_id", "date"]).any() or tuple(sorted(data.date.unique())) != DATES:
+    if data.duplicated(["cell_id", "date"]).any() or tuple(sorted(data.date.unique())) != tuple(dates):
         raise ValueError(f"Invalid cell-date IDs for {grid}")
-    if data.groupby("cell_id").date.size().ne(len(DATES)).any():
+    if data.groupby("cell_id").date.size().ne(len(dates)).any():
         raise ValueError(f"Each cell should have a row for each date in {grid}")
     if not ((data.tree_fraction + data.built_fraction).dropna() <= 1 + 1e-8).all():
         raise ValueError(f"Land-cover fractions overlap for {grid}")

@@ -1,0 +1,25 @@
+# Protocol for validation on additional Landsat overpasses
+
+Test whether the local tree-cover association and its variation with built cover recur on additional Landsat dates. The seven discovery dates and the Stage 1 and Stage 2 results are fixed. The validation changes the acquisition dates and preserves the Singapore study extent, the 500 m grid, the QA rules, and the two estimands. [Research roadmap](RESEARCH_ROADMAP.md) · [Stage 1 protocol](LOCAL_COMPARISON_PROTOCOL.md) · [Stage 2 protocol](BUILT_COVER_PROTOCOL.md)
+
+## Candidate coverage
+
+Audit the 30 Tier 1 scenes left out of the 2025 discovery sample. Use the archived scene screen of at least 60% WorldCover land valid and at least 44 of the 55 URA planning areas each at 30% valid coverage. Apply the inherited QA_PIXEL, nonzero ST_B10 and 15–70 °C rules. At 500 m, use the original land, classification and 60% temperature-coverage rules. Compute geographic overlap with the usable discovery cells, Stage 1 paired endpoints and Stage 2 modeled cells, alongside per-date counts of potential comparisons. [2025 coverage audit](FEASIBILITY.md) · [Pixel and cell rules](LANDSAT_ANALYSIS_PLAN.md)
+
+The held-out 2025 audit found zero qualifying scenes. The nearest complete earlier year with same-year Esri cover, 2024, supplied two dates in two periods. Extend the candidate ledger to 2023 to improve the opportunity to observe additional periods. The decision uses the coverage audit before estimating an association. Use all qualifying USGS Landsat 8 and 9 Collection 2 L2SP Tier 1 scenes over path 125 row 059 in 2023 and 2024. Use the same URA and WorldCover land domain and the Esri cover fractions for each acquisition's year. Verify grid alignment and map changes in tree, built and water classes. The comparisons use the 2025 planning boundary as a fixed spatial definition. [Landsat data access](https://www.usgs.gov/landsat-missions/landsat-data-access) · [Esri annual land cover](https://livingatlas.arcgis.com/landcover/)
+
+Record overpass time in Singapore and group dates by calendar period. Use December–March as a monthly grouping for the Northeast Monsoon, April–May for the first inter-monsoon, June–September for the Southwest Monsoon and October–November for the second inter-monsoon. These groups approximate climatological periods. Compare the period counts among candidates and qualifying dates. [Meteorological Service Singapore](https://www.weather.gov.sg/learn_winds/)
+
+## Freeze samples and comparisons
+
+Freeze the qualifying acquisitions, cell-date IDs and nearby matches before aggregating validation temperatures. Alongside the full eligible geography, analyze common cells with at least one usable overpass in 2025 and in each validation year with a qualifying acquisition. Apply a further land-cover stability check to the common cells by requiring ranges of at most five percentage points each in tree, built and Esri water shares across those annual maps. Use year-specific cover fractions in the models. Summarize class changes separately among mixed-boundary cells with less than 90% land in the fixed domain and among cells with at least 90%.
+
+Use the Stage 1 date-by-4 km block regression with built and squared built fractions and land share. Report the tree slope per ten percentage points with equal total weight per overpass. Apply the Stage 1 disjoint nearby-pair rules and report the normalized temperature contrast. Compare both methods on new dates and use the common geography to assess sensitivity to a change in the mix of locations.
+
+Carry forward the Stage 2 contrast from 2.5% to 12.5% tree cover at 65% and 85% built cover. Recheck both endpoints on the new dates with the original windows and pair rules. Report the 85%-minus-65% difference under the same quadratic interaction model. Reassess the same-block-date subset and the piecewise linear model. Show unsupported dates and the number of independent blocks in each band. Use the regression to describe a band difference only where both references have observed endpoint support and at least two distinct blocks each. Treat an estimate based on very few blocks as uncertain.
+
+## Report temporal variation and spatial uncertainty
+
+Use the established spatial bootstrap and keep whole blocks with their observed dates together. Report percentile intervals conditional on the dates of each pooled analysis. Plot the date-specific estimates and summarize their spread by calendar period. Give each date equal weight within its period and each represented period equal weight in the complementary summary of date-specific point estimates. State the number of contributing dates and report unsupported periods explicitly.
+
+Additional overpasses allow a check of temporal consistency under clear-sky conditions at the satellite overpass time. Period contrasts reflect which dates and surfaces were observed within each group. The validation findings are observational and depend on the joint geographic and land-cover support. [Clear-sky sampling](https://doi.org/10.1029/2018JD029354)

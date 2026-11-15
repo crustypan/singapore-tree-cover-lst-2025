@@ -1,0 +1,10 @@
+year,sample,dates,cells,cell_dates,stage1_pairs,stage1_pair_blocks,stage2_cells,stage2_cell_dates,stage2_dates_with_both_bands,stage2_shared_blocks,stage2_shared_block_dates,stage2_strict_shared_blocks,stage2_strict_shared_block_dates,stage2_lower_endpoint_blocks,stage2_lower_endpoint_block_dates,stage2_lower_low_tight_endpoint_cells,stage2_lower_high_tight_endpoint_cells,stage2_higher_endpoint_blocks,stage2_higher_endpoint_block_dates,stage2_higher_low_tight_endpoint_cells,stage2_higher_high_tight_endpoint_cells
+2023,full,6,2490,12229,336,33,264,1264,6,3,10,0,0,6,28,30,6,30,161,70,48
+2023,common,6,2442,12001,326,32,260,1231,6,3,10,0,0,6,28,29,5,30,158,69,46
+2023,common_stable,6,1701,8297,95,18,95,444,0,0,0,0,0,0,0,9,0,17,89,30,27
+2024,full,2,2454,4150,131,35,260,413,2,4,8,2,4,7,13,39,10,29,48,60,46
+2024,common,2,2442,4128,131,35,260,413,2,4,8,2,4,7,13,39,10,29,48,60,46
+2024,common_stable,2,1701,2824,31,15,84,129,0,0,0,0,0,0,0,9,0,17,29,28,27
+2025,full,7,2491,14678,431,34,284,1641,7,6,36,1,6,7,40,26,8,34,210,71,43
+2025,common,7,2442,14403,411,32,275,1597,7,6,36,1,6,7,40,26,7,33,204,71,42
+2025,common_stable,7,1701,10117,99,13,101,592,0,0,0,0,0,0,0,9,0,19,119,26,21

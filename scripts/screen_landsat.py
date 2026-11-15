@@ -24,11 +24,11 @@ SCALE = 0.00341802
 OFFSET = 149.0 - 273.15
 
 
-def catalog():
+def catalog(year=2025):
     query = urlencode({
         "collections": "landsat-c2-l2",
         "bbox": ",".join(map(str, BBOX)),
-        "datetime": "2025-01-01T00:00:00Z/2025-12-31T23:59:59Z",
+        "datetime": f"{year}-01-01T00:00:00Z/{year}-12-31T23:59:59Z",
         "limit": 100,
     })
     url = f"{STAC}?{query}"
@@ -43,14 +43,14 @@ def catalog():
         f for f in results
         if f["properties"]["platform"] in ("landsat-8", "landsat-9")
         and f["properties"].get("landsat:correction") == "L2SP"
-        and f["properties"]["datetime"].startswith("2025-")
+        and f["properties"]["datetime"].startswith(f"{year}-")
     ]
     if not scenes or len({f["id"] for f in scenes}) != len(scenes):
         raise ValueError("Empty Landsat catalog or duplicate scene IDs")
     return sorted(scenes, key=lambda scene: scene["id"])
 
 
-def land_layers(trim_to_30m):
+def land_layers(trim_to_30m, esri_path=ESRI):
     features = json.loads(BOUNDARY.read_text())["features"]
     names = sorted({f["properties"]["PLN_AREA_C"] for f in features})
     if len(names) != 55:
@@ -61,7 +61,7 @@ def land_layers(trim_to_30m):
         repaired = make_valid(shape(feature["geometry"]))
         geometry = transform_geom("EPSG:4326", GRID_CRS, mapping(repaired))
         geometries.append((geometry, idx[feature["properties"]["PLN_AREA_C"]]))
-    with rasterio.open(ESRI) as esri:
+    with rasterio.open(esri_path) as esri:
         h, w = esri.shape
         if trim_to_30m:
             h, w = 3 * (h // 3), 3 * (w // 3)
@@ -128,11 +128,11 @@ def mask_values(dn, qa):
     return valid_qa, plausible, temperatures
 
 
-def masked_scene(scene, public_signature, grid_transform, extent):
+def masked_scene(scene, public_signature, grid_transform, extent, read_window=native_window):
     results = {}
     for key, fill in {"lwir11": 0, "qa_pixel": 1}.items():
         bounds = array_bounds(*extent, grid_transform)
-        source, transform = native_window(scene["assets"][key]["href"], public_signature, bounds, fill)
+        source, transform = read_window(scene["assets"][key]["href"], public_signature, bounds, fill)
         aligned = np.full(extent, fill, dtype=np.uint16)
         reproject(source, aligned, src_crs=GRID_CRS, src_transform=transform,
                   dst_crs=GRID_CRS, dst_transform=grid_transform,
@@ -171,9 +171,9 @@ def native_footprints(selected, signature, output):
     )
 
 
-def compute_scene(scene, signature, grid):
+def compute_scene(scene, signature, grid, read_window=native_window):
     transform, weights, esri, area_codes, area_totals, cell_indices = grid
-    suitable, plausible, temperatures = masked_scene(scene, signature, transform, weights.shape)
+    suitable, plausible, temperatures = masked_scene(scene, signature, transform, weights.shape, read_window)
     used = suitable & plausible
 
     def measures(mask):
