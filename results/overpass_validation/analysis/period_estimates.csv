@@ -1,0 +1,25 @@
+cohort,analysis,period,selected_dates,estimated_dates,mean_c,min_c,max_c
+discovery,Stage 1 local regression,Northeast monsoon,3,3,-0.440605365,-0.474664782,-0.387780490
+discovery,Stage 1 local regression,First inter-monsoon,1,1,-0.428527792,-0.428527792,-0.428527792
+discovery,Stage 1 local regression,Southwest monsoon,1,1,-0.507457579,-0.507457579,-0.507457579
+discovery,Stage 1 local regression,Second inter-monsoon,2,2,-0.532665268,-0.590523574,-0.474806962
+discovery,Stage 1 nearby pairs,Northeast monsoon,3,3,-0.747547558,-0.817171125,-0.701713242
+discovery,Stage 1 nearby pairs,First inter-monsoon,1,1,-0.719472737,-0.719472737,-0.719472737
+discovery,Stage 1 nearby pairs,Southwest monsoon,1,1,-0.605586245,-0.605586245,-0.605586245
+discovery,Stage 1 nearby pairs,Second inter-monsoon,2,2,-0.806922607,-0.935321748,-0.678523466
+discovery,Stage 2 contrast difference,Northeast monsoon,3,3,0.267476704,0.138528868,0.473896380
+discovery,Stage 2 contrast difference,First inter-monsoon,1,1,0.811999634,0.811999634,0.811999634
+discovery,Stage 2 contrast difference,Southwest monsoon,1,1,0.470388846,0.470388846,0.470388846
+discovery,Stage 2 contrast difference,Second inter-monsoon,2,2,0.758539150,0.543307673,0.973770626
+validation,Stage 1 local regression,Northeast monsoon,1,1,-0.515297588,-0.515297588,-0.515297588
+validation,Stage 1 local regression,First inter-monsoon,2,2,-0.388970656,-0.439006464,-0.338934849
+validation,Stage 1 local regression,Southwest monsoon,2,2,-0.421796680,-0.530604860,-0.312988500
+validation,Stage 1 local regression,Second inter-monsoon,3,3,-0.588020517,-0.686565778,-0.532098495
+validation,Stage 1 nearby pairs,Northeast monsoon,1,1,-0.978271144,-0.978271144,-0.978271144
+validation,Stage 1 nearby pairs,First inter-monsoon,2,2,-0.763131339,-0.859332621,-0.666930058
+validation,Stage 1 nearby pairs,Southwest monsoon,2,2,-0.903449978,-1.021167056,-0.785732900
+validation,Stage 1 nearby pairs,Second inter-monsoon,3,3,-1.031839702,-1.214016610,-0.868278167
+validation,Stage 2 contrast difference,Northeast monsoon,1,1,0.257901639,0.257901639,0.257901639
+validation,Stage 2 contrast difference,First inter-monsoon,2,2,0.602214234,0.572596044,0.631832425
+validation,Stage 2 contrast difference,Southwest monsoon,2,2,0.096757073,-0.137059319,0.330573466
+validation,Stage 2 contrast difference,Second inter-monsoon,3,3,0.756578181,0.204244154,1.254488253

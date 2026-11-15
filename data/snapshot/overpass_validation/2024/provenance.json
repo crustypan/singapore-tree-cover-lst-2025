@@ -1,0 +1,23 @@
+{
+  "dates": [
+    "2024-03-13",
+    "2024-10-23"
+  ],
+  "scene_ids": [
+    "LC09_L2SP_125059_20240313_02_T1",
+    "LC09_L2SP_125059_20241023_02_T1"
+  ],
+  "esri_land_cover_year": 2024,
+  "design_sha256": "4fcb589ebdef431f6dd0da828ad273179fb54ac61e65ce37a353ac8cf7c7c25a",
+  "inputs_sha256": {
+    "esri_impact_observatory_2024_48N_singapore.tif": "0c06368a46b2f043a5cccb85ab9f1d289648fc4f6b03a3e4b1e157bdfa2e0260",
+    "ura_planning_area_no_sea_2025.geojson": "e6ecc1743de5c39ec154a30b3b8037896fbc6c5f863e10c7dbfd77de12706c9c",
+    "ESA_WorldCover_10m_2021_v200_N00E102_Map.tif": "24f5c220bc195e2d9e136666901cafad26b8e16790ac19a9a6d7016199c1bfdf"
+  },
+  "windows_sha256": {
+    "LC09_L2SP_125059_20240313_02_T1": "0f5a49cc030b314649c5bb58ef1914abad8a607e4128c8e68b4834f52f118788",
+    "LC09_L2SP_125059_20241023_02_T1": "df4669ca9ae6f49f55a74d1b0b99b87b40e136e5103b426f758caf402bb602f0"
+  },
+  "panel_sha256": "58997745d15c4116c4492e63a375cdbe9e2eb91b0096188672897fe40d2b413a",
+  "decompressed_panel_sha256": "e86176a3d8ca3070a02b54b07a887c86f17444f568210c76c79a5acb7f823925"
+}

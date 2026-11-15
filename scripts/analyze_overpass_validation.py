@@ -27,7 +27,7 @@ def local_result(frame, pairs, method, draws):
     else:
         if pairs.empty:
             return {"status": "no pairs"}
-        result, _ = estimate_pairs(pairs, draws)
+        result = estimate_pairs(pairs, draws)
     return {k: v for k, v in result.items() if k != "coef"}
 
 

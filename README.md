@@ -1,6 +1,12 @@
 # Tree cover and daytime land surface temperature in Singapore
 
-This study uses seven clear-sky Landsat 8/9 overpasses in 2025 to ask whether parts of Singapore with more tree cover had cooler daytime surfaces, and whether the association varied with built-area cover. It combines 10 m land-cover classifications and Landsat surface-temperature measurements on a 500 m grid.
+This study uses seven clear-sky Landsat 8/9 overpasses in 2025 and eight validation overpasses in 2023–24 to ask whether parts of Singapore with more tree cover had cooler daytime surfaces, and whether the association varied with built-area cover. It combines 10 m land-cover classifications and Landsat surface-temperature measurements on a 500 m grid.
+
+## Stage 3 validation on additional overpasses
+
+The 30 remaining 2025 Tier 1 scenes supplied zero qualifying dates under the original scene screen. Six scenes from 2023 and two from 2024 qualified, covering all four calendar periods. On these eight dates, ten more percentage points of tree cover was associated with **0.49 °C lower daytime surface temperature** within a date and 4 km area [−0.57, −0.43]. The original estimate was 0.48 °C lower. The pooled 85%-minus-65% built-cover difference was **+0.50 °C** [−0.21, +1.16], and the point estimate was **−0.18 °C** on the subset of shared block-dates. Both approximate 95% intervals for the built-cover difference span zero.
+
+[Validation methods and results](docs/OVERPASS_VALIDATION_RESULTS.md) · [Candidate coverage](results/overpass_validation/figures/candidate_coverage.png) · [Comparison figure](results/overpass_validation/figures/validation_estimates.png) · [Reproduction guide](docs/REPRODUCE.md#stage-3-validation-on-additional-overpasses)
 
 ## Stage 2 variation with built cover
 

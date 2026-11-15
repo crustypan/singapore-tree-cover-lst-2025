@@ -2,12 +2,22 @@ import unittest
 
 import pandas as pd
 
-from analyze_overpass_validation import date_and_period_tables
+from analyze_overpass_validation import PAIRS, date_and_period_tables, local_result
 from audit_heldout_overpasses import SEASONS, period
 from prepare_overpass_validation import compare_annual_cover
 
 
 class OverpassValidation(unittest.TestCase):
+    def test_local_pair_summary_reuses_normalized_stage_one_result(self):
+        pairs = pd.DataFrame({
+            "date": ["2024-03-13", "2024-10-23"], "block_e": [1, 2], "block_n": [1, 1],
+            "lower_tree_cell": ["a", "b"], "higher_tree_cell": ["c", "d"],
+            "lst_per_10pp_c": [-0.4, -0.8], "lst_gap_c": [-0.36, -0.88],
+        })
+        result = local_result(pd.DataFrame(), pairs, PAIRS, draws=0)
+        self.assertEqual(result["pairs"], 2)
+        self.assertAlmostEqual(result["estimate_c_per_10pp"], -0.6)
+
     def test_common_stable_requires_observation_and_similar_cover_in_all_years(self):
         grid = pd.DataFrame({
             "cell_id": ["unchanged", "missing", "water_shift", "built_shift"],

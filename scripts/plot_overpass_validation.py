@@ -138,8 +138,8 @@ def plot_pooled(design, results, path):
     fig.subplots_adjust(left=0.153, right=0.959, top=0.79, bottom=0.222, wspace=0.60)
     heading(fig, "Local temperature contrasts on additional dates",
             "Singapore · same 500 m grid and QA rules · discovery and temporal validation")
-    forest_axis(left, "Daytime LST difference per +10 tree points (°C)", "Stage 1 · local tree association")
-    forest_axis(right, "Difference in tree contrast, 85% minus 65% built (°C)", "Stage 2 · variation with built cover")
+    forest_axis(left, "Daytime LST difference per +10 pp tree cover (°C)", "Stage 1 · local tree association")
+    forest_axis(right, "85% minus 65% built (°C)\nTree cover 2.5% to 12.5%", "Stage 2 · variation with built cover")
     labels = []
     for y, (cohort, sample) in enumerate(options):
         color = COHORT_COLOR[cohort]
@@ -153,7 +153,7 @@ def plot_pooled(design, results, path):
             draw_interval(right, y, row.higher_minus_lower_estimate_c, row.higher_minus_lower_lower_c,
                           row.higher_minus_lower_upper_c, color)
         else:
-            right.annotate("Sparse support", (0.03, y), xycoords=("axes fraction", "data"),
+            right.annotate("Sparse support", (0.34, y), xycoords=("axes fraction", "data"),
                            va="center", color=MUTED, fontsize=9)
         labels.append(f"{names[cohort]}\n{sample_labels[sample]}")
     for axis in (left, right):
@@ -177,8 +177,8 @@ def plot_by_date(results, path):
     heading(fig, "Temperature contrasts by Landsat overpass",
             "Points summarize date-to-date variation · bars quantify spatial uncertainty within each date")
     for ax, method, xlabel, title in (
-        (left, REGRESSION, "LST difference per +10 tree points (°C)", "Stage 1 · local regression"),
-        (right, MODERATION, "85% minus 65% built (°C)", "Stage 2 · contrast difference"),
+        (left, REGRESSION, "LST difference per +10 pp tree cover (°C)", "Stage 1 · local regression"),
+        (right, MODERATION, "85% minus 65% built (°C)\nTree cover 2.5% to 12.5%", "Stage 2 · contrast difference"),
     ):
         forest_axis(ax, xlabel, title)
         rows = daily[daily.analysis == method].set_index("date").loc[dates]

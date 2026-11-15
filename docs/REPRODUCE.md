@@ -2,6 +2,40 @@
 
 Use the environment and commands in the [README](../README.md). All code runs from the repository root. The pipeline writes new download caches and intermediate products inside the project. The result paths passed to each script can point to a new directory for comparison against the checked-in outputs.
 
+## Stage 3 validation on additional overpasses
+
+The candidate manifests pin the Tier 1 product IDs and unsigned asset URLs. The audit recomputes the original scene rule and 500 m coverage from cropped Landsat windows. It uses each year's Esri classification, with the same WorldCover domain and URA geometry. The design step freezes the usable IDs, shared geography and comparisons before the temperature fit.
+
+```bash
+.venv/bin/python -B scripts/fetch_inputs.py spatial
+for year in 2023 2024 2025; do
+  .venv/bin/python -B scripts/audit_heldout_overpasses.py --year "$year" \
+    --candidates "results/overpass_validation/audit/$year/candidate_scenes.csv" \
+    --output ".scratch/validation/audit/$year"
+done
+.venv/bin/python -B scripts/prepare_overpass_validation.py --audit .scratch/validation/audit \
+  --output .scratch/validation/design
+.venv/bin/python -B scripts/make_validation_panel.py --audit .scratch/validation/audit \
+  --design .scratch/validation/design --output .scratch/validation/snapshots
+.venv/bin/python -B scripts/analyze_overpass_validation.py --design .scratch/validation/design \
+  --snapshots .scratch/validation/snapshots --output .scratch/validation/analysis
+.venv/bin/python -B scripts/plot_overpass_validation.py --audit .scratch/validation/audit \
+  --design .scratch/validation/design --results .scratch/validation/analysis --output .scratch/validation/figures
+```
+
+To start with the committed snapshots and frozen design, run `.venv/bin/python -B scripts/analyze_overpass_validation.py --output .scratch/validation/analysis`. The estimate script checks design and panel hashes and verifies the eligibility registry. The snapshot coverage fields are area weights on the same grid as the original Landsat panel.
+
+| File | Contents |
+| --- | --- |
+| `results/overpass_validation/audit/<year>/scene_coverage.csv` | Scene-level screen, overpass time, calendar period, overlap with earlier samples and support for comparisons. |
+| `results/overpass_validation/audit/<year>/usable_cell_dates.csv.gz` | Date, cell ID and passing area for usable cell-dates. |
+| [Validation design](../results/overpass_validation/design/design_record.json) | Frozen acquisitions, covariate stability rule, source and design hashes. |
+| [Annual land-cover comparison](../results/overpass_validation/design/annual_cover_comparison.csv) | Annual class shares, cover ranges and observation counts for each cell. |
+| [Local estimates](../results/overpass_validation/analysis/local_estimates.csv) and [built-cover estimates](../results/overpass_validation/analysis/built_cover_estimates.csv) | Discovery and validation estimates on the full, common and common stable geographies. |
+| [Date estimates](../results/overpass_validation/analysis/date_estimates.csv) and [period estimates](../results/overpass_validation/analysis/period_estimates.csv) | Date-specific spatial intervals and descriptive temporal variation. |
+
+[Validation protocol](OVERPASS_VALIDATION_PROTOCOL.md) · [Stage 3 results](OVERPASS_VALIDATION_RESULTS.md)
+
 ## Stage 2 variation with built cover
 
 The design uses the archived primary 500 m input panel and its accepted cell-date IDs. It reads only design columns and hashes the complete snapshot. Fit the temperature model after generating and inspecting the support maps. The spatial download supplies the boundary for the geographic map.

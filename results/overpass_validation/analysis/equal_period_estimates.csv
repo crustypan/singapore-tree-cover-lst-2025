@@ -1,0 +1,7 @@
+cohort,analysis,periods_represented,estimated_dates,equal_period_mean_c
+discovery,Stage 1 local regression,4,7,-0.477314001
+discovery,Stage 1 nearby pairs,4,7,-0.719882287
+discovery,Stage 2 contrast difference,4,7,0.577101084
+validation,Stage 1 local regression,4,8,-0.478521360
+validation,Stage 1 nearby pairs,4,8,-0.919173041
+validation,Stage 2 contrast difference,4,8,0.428362782

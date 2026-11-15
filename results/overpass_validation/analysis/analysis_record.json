@@ -1,0 +1,28 @@
+{
+  "design_sha256": "4fcb589ebdef431f6dd0da828ad273179fb54ac61e65ce37a353ac8cf7c7c25a",
+  "validation_years": [
+    2023,
+    2024
+  ],
+  "dates": [
+    "2023-04-12",
+    "2023-05-22",
+    "2023-07-25",
+    "2023-09-27",
+    "2023-10-05",
+    "2023-10-13",
+    "2024-03-13",
+    "2024-10-23"
+  ],
+  "common_cells": 2442,
+  "common_stable_cells": 1701,
+  "result_sha256": {
+    "local_estimates.csv": "fe91d32e8f836f67a8a39d8b48949e648e4cd750656cfd4b81db6bfc1572dacf",
+    "built_cover_estimates.csv": "c736930b6200b356971c669e626e3a60a511cf10b024ed3d473667b06637b9cd",
+    "date_estimates.csv": "c9a5057919fee77ed2796560643a7eef18bcb49ba26f03dcc1a58e3ebe7cb836",
+    "period_estimates.csv": "0b205a6087c5226e06148a6034bcd7477b52c21af25f0f97249af4e9304546bc",
+    "equal_period_estimates.csv": "0097c468f11e70af944d2b37e4510870976477abb370af32d72d1ef528666ac8",
+    "cover_stability.csv": "82e2af50e107f9bc48d8944cc09cd17191d07d42874c344d9e90d27d51a34709",
+    "paired_temperatures.csv": "730a103012469f232cd22062f1813bb487d0d475e0d6ba223fc1a48a8dff35c7"
+  }
+}
