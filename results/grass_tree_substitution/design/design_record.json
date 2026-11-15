@@ -1,0 +1,67 @@
+{
+  "validation_design_sha256": "4fcb589ebdef431f6dd0da828ad273179fb54ac61e65ce37a353ac8cf7c7c25a",
+  "sla_source_sha256": "80791c1e271c378f26ab8c618eb019848c89d0c77306adbaf559f744c5c9048b",
+  "sla_archive_sha256": "01f8f4ee51000e8b53e29f9261d93fa0f05e0a1ce497205d445d6d258d3e1858",
+  "water_thresholds_km2": [
+    0.25,
+    0.1
+  ],
+  "target_tree_fraction": 0.1,
+  "target_rangeland_fraction": -0.1,
+  "component_gap_tolerance": 0.02,
+  "land_gap_tolerance": 0.1,
+  "dates": [
+    "2023-04-12",
+    "2023-05-22",
+    "2023-07-25",
+    "2023-09-27",
+    "2023-10-05",
+    "2023-10-13",
+    "2024-03-13",
+    "2024-10-23",
+    "2025-01-03",
+    "2025-02-04",
+    "2025-05-03",
+    "2025-07-06",
+    "2025-10-02",
+    "2025-10-18",
+    "2025-12-05"
+  ],
+  "eligible_cell_dates": 31057,
+  "eligible_cells": 2500,
+  "match_block_size_m": 4000,
+  "matching": {
+    "primary": {
+      "rule": {
+        "distance_m": 2000,
+        "built_other_gap": 0.05,
+        "combined_gap": 0.02
+      },
+      "candidate_cells": 135,
+      "pairs": 216,
+      "matched_cells": 94,
+      "matched_blocks": 24,
+      "matched_dates": 15
+    },
+    "tighter": {
+      "rule": {
+        "distance_m": 1500,
+        "built_other_gap": 0.03,
+        "combined_gap": 0.015
+      },
+      "candidate_cells": 92,
+      "pairs": 152,
+      "matched_cells": 64,
+      "matched_blocks": 18,
+      "matched_dates": 15
+    }
+  },
+  "design_sha256": {
+    "cell_covariates.csv": "bfe114030da87df0159e007a67e7d9b5dbc3676bd6ab32544c52fb536d23b92d",
+    "cell_date_support.csv": "613f8ac2c66f6024b65f28698d99c644f591929ee001b6933c37b335e9f03dbf",
+    "pairs_primary.csv": "d7b19434eacd42b895d251672efd235d1538ec9b2d30b93a34486b6658c77f60",
+    "pairs_tighter.csv": "ccaf7c84530c1facbbe9985ec6b6d57b46d7236f1931921df8442c99bd3875d8",
+    "support_by_date.csv": "6918ebf82f9ae82bbb96f106e189507dccf63b41ec22b708f70304e68975b0c0",
+    "water_components.csv": "d3023d191a745c1bf7d0198b80f44d8112ad858e96ae6ccd80e3ca32b5085647"
+  }
+}

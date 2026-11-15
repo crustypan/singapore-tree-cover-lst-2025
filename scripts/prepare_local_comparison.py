@@ -150,8 +150,8 @@ def build_matches(observed, rule):
     return frame, pd.DataFrame(counts), pd.DataFrame(available, columns=KEY), matched
 
 
-def cover_composition(panel):
-    affine, world, _, _, esri = land_layers(trim_to_30m=False)
+def cover_composition(panel, esri_path=ESRI):
+    affine, world, _, _, esri = land_layers(trim_to_30m=False, esri_path=esri_path)
     row, col = np.nonzero(world)
     x = affine.c + (col + 0.5) * affine.a
     y = affine.f + (row + 0.5) * affine.e
