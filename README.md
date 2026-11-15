@@ -20,6 +20,8 @@ The observations describe land surface temperature around **11:16 a.m. Singapore
 
 [Read the full research report](docs/REPORT.md) · [Coverage and residual maps](results/landsat_analysis/figures/landsat_maps.png) · [Acquisition-level checks](results/landsat_analysis/figures/date_estimates.png) · [Data sources and licences](docs/DATA_SOURCES.md)
 
+The [long-term research plan](docs/RESEARCH_ROADMAP.md) develops local comparisons, tests variation with built cover, and sets out how to validate both results on additional overpasses.
+
 ## Reproduce
 
 The analysis ran on Linux x86-64 and Python 3.10.12. Run these commands from the repository root. Embedded snapshot tables provide a fixed model input.
