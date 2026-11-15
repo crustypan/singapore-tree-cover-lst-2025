@@ -1,0 +1,5 @@
+cohort,band,cell_dates,distinct_cells,blocks,dates,mean_tree_pct,mean_built_pct
+band-supported sample,higher,1452,249,34,7,5.577336293,87.846066044
+band-supported sample,lower,189,35,7,7,4.604187400,64.235206143
+shared block-dates,higher,257,46,6,7,4.502508761,86.588739870
+shared block-dates,lower,147,24,6,7,5.608033292,65.123337333

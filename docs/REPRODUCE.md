@@ -2,6 +2,33 @@
 
 Use the environment and commands in the [README](../README.md). All code runs from the repository root. The pipeline writes new download caches and intermediate products inside the project. The result paths passed to each script can point to a new directory for comparison against the checked-in outputs.
 
+## Stage 2 variation with built cover
+
+The design uses the archived primary 500 m input panel and its accepted cell-date IDs. It reads only design columns and hashes the complete snapshot. Fit the temperature model after generating and inspecting the support maps. The spatial download supplies the boundary for the geographic map.
+
+```bash
+.venv/bin/python -B scripts/fetch_inputs.py spatial
+.venv/bin/python -B scripts/prepare_built_support.py --output .scratch/built-reproduction/design
+.venv/bin/python -B scripts/plot_built_support.py --design .scratch/built-reproduction/design \
+  --output .scratch/built-reproduction/design
+.venv/bin/python -B scripts/analyze_built_cover.py --design .scratch/built-reproduction/design \
+  --output .scratch/built-reproduction/analysis
+.venv/bin/python -B scripts/plot_built_results.py --results .scratch/built-reproduction/analysis \
+  --output .scratch/built-reproduction/figures
+```
+
+Use `--design results/built_cover_moderation/design` in the analysis command to start from the committed design. The analysis checks the recorded hashes before reading temperatures.
+
+| File | Contents |
+| --- | --- |
+| [Joint density](../results/built_cover_moderation/design/joint_density.csv) | Distinct usable cells by five-point tree and built bins. |
+| [Band support](../results/built_cover_moderation/design/band_support.csv) and [shared support](../results/built_cover_moderation/design/shared_support.csv) | Counts near each endpoint and numbers of eligible spatial blocks and block-dates, with and without the nearby-pair rules. |
+| [Frozen design](../results/built_cover_moderation/design/design_record.json) | Selected reference contrasts, comparable sample counts and SHA-256 checks for inputs and design tables. |
+| [Fitting registry](../results/built_cover_moderation/design/fit_sample.csv) and [strict pairs](../results/built_cover_moderation/design/strict_pairs.csv) | Cell-date IDs and within-band pair IDs determined before the temperature fit. |
+| [Estimates](../results/built_cover_moderation/analysis/estimates.json) and [robustness table](../results/built_cover_moderation/analysis/robustness.csv) | Finite ten-point contrasts, cross-band difference, conditional intervals, fit metrics and draw counts. |
+
+[Protocol](BUILT_COVER_PROTOCOL.md) · [Stage 2 results](BUILT_COVER_RESULTS.md)
+
 ## Stage 1 Local comparisons
 
 The design uses the archived 500 m input panel and the baseline usable cell-date IDs. The source rasters supply the map boundary and Esri class counts. Generate the design and its map before fitting the models.

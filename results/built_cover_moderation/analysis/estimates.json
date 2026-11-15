@@ -1,0 +1,127 @@
+{
+  "design_sha256": "e2384e7b0486918a0509302f0c6006d64b83efbe1ea4d3bdf20d9f14ac581c9d",
+  "bootstrap_seed": 20251116,
+  "contrast": {
+    "tree_start_pct": 2.5,
+    "tree_end_pct": 12.5,
+    "lower_built_pct": 65,
+    "higher_built_pct": 85,
+    "built_gap_pp": 20,
+    "minimum_tight_endpoint_cells": 8,
+    "shared_blocks": 6,
+    "shared_dates": 7,
+    "shared_block_dates": 36,
+    "shared_strict_blocks": 1,
+    "shared_strict_block_dates": 6,
+    "shared_strict_dates": 6
+  },
+  "additive": {
+    "status": "estimated",
+    "cell_dates": 1641,
+    "cells": 284,
+    "dates_used": 7,
+    "date_labels": "2025-01-03, 2025-02-04, 2025-05-03, 2025-07-06, 2025-10-02, 2025-10-18, 2025-12-05",
+    "bootstrap_blocks": 35,
+    "lower_band_blocks": 7,
+    "higher_band_blocks": 34,
+    "draws_requested": 1999,
+    "draws_with_both_bands": 1745,
+    "draws_retained": 1745,
+    "strata": 214,
+    "within_rmse_c": 1.6347103771823286,
+    "condition_number": 18.60596653611197,
+    "coefficients": {
+      "tree": -1.0664854818541993,
+      "built": 0.356453483327702,
+      "land_share": 7.50944728727752,
+      "tree_squared": 1.2137563329667613,
+      "built_squared": -0.0578256932317608
+    },
+    "contrasts": {
+      "lower_built": {
+        "estimate_c": -1.0664854818541993,
+        "lower_c": -1.526803174893434,
+        "upper_c": -0.603748756376549
+      },
+      "higher_built": {
+        "estimate_c": -1.0664854818541993,
+        "lower_c": -1.526803174893434,
+        "upper_c": -0.603748756376549
+      },
+      "higher_minus_lower": {
+        "estimate_c": 0.0,
+        "lower_c": 0.0,
+        "upper_c": 0.0
+      }
+    }
+  },
+  "interaction": {
+    "status": "estimated",
+    "cell_dates": 1641,
+    "cells": 284,
+    "dates_used": 7,
+    "date_labels": "2025-01-03, 2025-02-04, 2025-05-03, 2025-07-06, 2025-10-02, 2025-10-18, 2025-12-05",
+    "bootstrap_blocks": 35,
+    "lower_band_blocks": 7,
+    "higher_band_blocks": 34,
+    "draws_requested": 1999,
+    "draws_with_both_bands": 1745,
+    "draws_retained": 1745,
+    "strata": 214,
+    "within_rmse_c": 1.6313903916552743,
+    "condition_number": 19.617209331906288,
+    "coefficients": {
+      "tree": -1.2124862924832165,
+      "built": 0.42548464358562516,
+      "land_share": 7.384817511190927,
+      "tree_squared": 1.374469597846616,
+      "built_squared": -0.032989383202296045,
+      "tree_by_built": 0.24507972219672855
+    },
+    "contrasts": {
+      "lower_built": {
+        "estimate_c": -1.457566014679945,
+        "lower_c": -2.126688660966914,
+        "upper_c": -0.8183633886721833
+      },
+      "higher_built": {
+        "estimate_c": -0.9674065702864879,
+        "lower_c": -1.4489939103818619,
+        "upper_c": -0.513347992247327
+      },
+      "higher_minus_lower": {
+        "estimate_c": 0.4901594443934571,
+        "lower_c": -0.0940979655619599,
+        "upper_c": 1.212208572957833
+      }
+    }
+  },
+  "paired": {
+    "same_dates": {
+      "status": "descriptive",
+      "lower_built_c": -0.6988457591178904,
+      "higher_built_c": -1.1179910952103893,
+      "higher_minus_lower_c": -0.41914533609249893,
+      "dates": 7,
+      "spatial_blocks": 16,
+      "groups": 7,
+      "lower_pairs": 17,
+      "higher_pairs": 109,
+      "lower_blocks": 3,
+      "higher_blocks": 14
+    },
+    "same_block_dates": {
+      "status": "descriptive",
+      "lower_built_c": -0.3679890797707137,
+      "higher_built_c": -1.162300077018523,
+      "higher_minus_lower_c": -0.7943109972478093,
+      "dates": 6,
+      "spatial_blocks": 1,
+      "groups": 6,
+      "lower_pairs": 6,
+      "higher_pairs": 12,
+      "lower_blocks": 1,
+      "higher_blocks": 1
+    }
+  }
+}
