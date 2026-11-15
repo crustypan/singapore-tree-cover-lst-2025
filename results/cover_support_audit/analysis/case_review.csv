@@ -1,0 +1,20 @@
+case,evidence,years_with_change,short_label,notes,illustrated,roi_col_start,roi_row_start,roi_col_end,roi_row_end
+C01,unresolved,,Similar layout,"Roads, roofs and large green patches are similar in the three images. Small class changes at mixed edges remain ambiguous.",False,,,,
+C02,unresolved,,Partial central view,"The fairway-like strips are visible in all years. The central dark feature has uneven usable imagery across years.",False,,,,
+C03,clear_surface_change,2023–24 and 2024–25,Earthworks and greening,"The large tan parcel expands across the south in 2024. A substantial part becomes greener in 2025 while the northwestern structures persist.",False,,,,
+C04,clear_surface_change,2024–25,Central clearing,"A coherent rectangular pale clearing appears near the middle of the formerly darker parcel in 2025.",False,,,,
+C05,localized_or_vegetation_change,2024–25,Localized western changes,"The northwestern rectangle darkens and parts of the open western parcel green up. The large eastern roofs and street layout remain recognizable.",False,,,,
+C06,localized_or_vegetation_change,2023–24 and 2024–25,Narrow disturbed strip,"The eastern diagonal strip becomes brighter and wider in 2024 and greener again in 2025. The change follows a narrow corridor.",False,,,,
+C07,unresolved,,Similar visible layout,"The visible roof and path pattern is similar across years. The Esri changes exceed the structural differences that can be identified in these images.",True,5,4,44,44
+C08,clear_surface_change,2023–24 and 2024–25,Wide linear disturbance,"A wide diagonal corridor loses vegetation and has exposed ground in 2024. A bright continuous linear surface appears along the same corridor in 2025.",True,12,3,47,48
+C09,clear_surface_change,2023–24 and 2024–25,Expanding exposed parcel,"Exposed ground at the western edge grows in 2024. The disturbed area expands farther east with a more textured surface in 2025.",False,,,,
+C10,clear_surface_change,2024–25,New exposed ground,"A broad pale earthwork replaces much of the darker central and eastern surface above the diagonal road in 2025.",True,2,7,48,42
+C11,localized_or_vegetation_change,2023–24 and 2024–25,East-edge disturbance,"The eastern edge contains a new pale patch in 2024 that darkens by 2025. The main paths and western section are similar across years.",False,,,,
+C12,clear_surface_change,2023–24 and 2024–25,Southwest clearing,"The southwest contains a new broad pale clearing in 2024 and brighter structured features in 2025. The optical record is thinner in the north of the 2023 chip.",False,,,,
+C13,clear_surface_change,2023–25,Surface reconfiguration,"The dominant exposed-ground area is reconfigured into larger pale and gray rectangles and more defined routes by 2025.",False,,,,
+C14,localized_or_vegetation_change,2023–24 and 2024–25,Northeast rectangle,"A bright rectangle appears near the northeast corner and brightens further. Its size and location limit what it can explain elsewhere in the cell.",False,,,,
+C15,localized_or_vegetation_change,2023–24 and 2024–25,Changing exposed edges,"Pale ground becomes visible along the west edge and later at the northeast edge. The central elongated features remain recognizable.",False,,,,
+C16,localized_or_vegetation_change,2023–25,Localized greening,"The most distinct roofs and roads are visible throughout. A localized increase in vegetation signal appears in the darker landscaped area.",False,,,,
+C17,unresolved,,Incomplete repeated visibility,"Cloud and shadow masking leaves substantially less repeat coverage in 2024. The visible eastern feature has a similar outline in all years.",False,,,,
+C18,unresolved,,Similar roads and green areas,"The characteristic roads and green parcels show similar shapes across years. Differences are mostly subtle at 10 m.",False,,,,
+C19,localized_or_vegetation_change,2024–25,Open-ground appearance,"The central open parcel becomes browner in 2025 and small pale patches shift over time. The cause of the larger Esri built-share range remains unresolved.",False,,,,

@@ -68,6 +68,10 @@ Once the extension has usable support and an agreed scope, lock its date selecti
 
 Allow about three to five weeks for the coverage audit and a validation run if the data qualify. Deliver the candidate-date inventory, period and area coverage, and a comparison with the earlier results. If usable dates remain concentrated in a few periods, report that pattern and state which periods the estimates represent.
 
+## Stage 4 Audit of the land-cover comparison
+
+Use the Stage 3 loss of the high-tree endpoint at 65% built cover to define the review cells. Isolate the tree, built and water stability rules and inspect those cells in dated Sentinel-2 images. Reconstruct a second classification with the released Dynamic World weights. Recount the same local comparisons on a common pixel footprint and report the number of supported blocks in each band. The deliverables are the selected image inventory, case evidence, coverage diagnostics, support counts and code. [Stage 4 protocol](COVER_SUPPORT_AUDIT_PROTOCOL.md)
+
 ## Research record and handoff
 
 Run each stage in the independent laboratory-server project. Commit the analysis decisions before fitting, then version the code, input and output manifests, figures, sensitivity results, and English findings in the dedicated GitHub repository. Keep the dated 2025 baseline available for comparison. Record actual applicant contributions when methodological choices, results review, or interpretation take place, along with AI-assisted work. A stage is ready to share once its sample, estimates, and figures can be reproduced and its conclusion matches its sampled dates and geographic support.

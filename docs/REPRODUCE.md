@@ -2,6 +2,44 @@
 
 Use the environment and commands in the [README](../README.md). All code runs from the repository root. The pipeline writes new download caches and intermediate products inside the project. The result paths passed to each script can point to a new directory for comparison against the checked-in outputs.
 
+## Stage 4 land-cover and comparison-support audit
+
+The committed cover table and source-image chips can reproduce the support counts and figures without an Earth Engine account. The case review table records interpretation of the chips. The archived Sentinel-2 manifest fixes the optical dates and unsigned source URLs.
+
+```bash
+.venv/bin/python -B scripts/fetch_inputs.py spatial
+.venv/bin/python -B scripts/prepare_cover_support_audit.py --output .scratch/cover-repro/design
+.venv/bin/python -B scripts/analyze_cover_support_audit.py count --design .scratch/cover-repro/design \
+  --output .scratch/cover-repro/analysis
+.venv/bin/python -B scripts/plot_cover_support_audit.py --design .scratch/cover-repro/design \
+  --analysis .scratch/cover-repro/analysis \
+  --review results/cover_support_audit/analysis/case_review.csv --output .scratch/cover-repro/figures
+```
+
+To regenerate the optical snapshot, create a separate CPU environment and download the original forward model from the versioned repository. The inference script checks the three weight digests.
+
+```bash
+.venv/bin/python -m venv .scratch/cover-support/tf-venv
+.scratch/cover-support/tf-venv/bin/python -m pip install -r requirements-dynamic-world-lock.txt
+.scratch/cover-support/tf-venv/bin/python -m pip check
+dw_forward=.scratch/cover-support/model/model/forward
+dw_source=https://raw.githubusercontent.com/google/dynamicworld/0dd288fae5fb5291d988e5ea3c12eb91df481ec5/model/forward
+mkdir -p "$dw_forward/variables"
+for file in saved_model.pb variables/variables.index variables/variables.data-00000-of-00001; do
+  curl --fail --silent --show-error --location "$dw_source/$file" --output "$dw_forward/$file"
+done
+export TF_NUM_INTEROP_THREADS=1 TF_NUM_INTRAOP_THREADS=2 TF_CPP_MIN_LOG_LEVEL=2
+for year in 2023 2024 2025; do
+  .venv/bin/python -B scripts/fetch_cover_audit_sentinel.py fetch --year "$year" \
+    --output results/cover_support_audit/imagery
+  .scratch/cover-support/tf-venv/bin/python -B scripts/run_cover_audit_dynamic_world.py --year "$year" \
+    --output .scratch/cover-support/inference
+done
+.venv/bin/python -B scripts/analyze_cover_support_audit.py extract --snapshot .scratch/cover-repro/snapshot
+```
+
+The fetch caches clipped data from the frozen products. Run it with `select` and a scratch output directory to repeat the STAC search and local cloud ranking. The seasonal selection can change if the provider reprocesses or adds an item. [Stage 4 protocol](COVER_SUPPORT_AUDIT_PROTOCOL.md) · [Stage 4 findings](COVER_SUPPORT_AUDIT_RESULTS.md) · [Snapshot provenance](../data/snapshot/cover_support_audit/provenance.json)
+
 ## Stage 3 validation on additional overpasses
 
 The candidate manifests pin the Tier 1 product IDs and unsigned asset URLs. The audit recomputes the original scene rule and 500 m coverage from cropped Landsat windows. It uses each year's Esri classification, with the same WorldCover domain and URA geometry. The design step freezes the usable IDs, shared geography and comparisons before the temperature fit.

@@ -1,0 +1,71 @@
+{
+  "design_sha256": "7c7e1dcf2bab022c43e4800be0e1d3686d980ca9854ae76c411e5f25edc32908",
+  "manifest_sha256": "300e3e6ebba431e7dc8117024aef88909f2443e927e9e80ffaa7bdc30e0dcb9f",
+  "inference": {
+    "2023": {
+      "year": 2023,
+      "tensorflow": "2.16.1",
+      "halo_px": 48,
+      "tile_px": 512,
+      "model_sha256": {
+        "saved_model.pb": "e47c4eafa62656b688893a4d86f67f0ad9e08baaf5b5b1ce2f320208b08d4b18",
+        "variables/variables.data-00000-of-00001": "c4a38299f2c0a741682cbe48810d55afdc832ff451e3d3708082751fe655fcb1",
+        "variables/variables.index": "f27000c6a3d7dcd3e76e333331b108697712c734d5d5ef11b3f34571027c8436"
+      },
+      "manifest_sha256": "300e3e6ebba431e7dc8117024aef88909f2443e927e9e80ffaa7bdc30e0dcb9f",
+      "input_sha256": {
+        "S2A_MSIL2A_20230619T031521_R118_T48NUG_20240926T212658": "08fa4e0be0a9a07e4f5b9c74076eb99b92326407bd5f54b98532462ba4e69478",
+        "S2A_MSIL2A_20230629T031521_R118_T48NUG_20241003T063116": "5946b68ac34c9a0883c7241514cbbf0b8e4ec7eaba248ff112b8731766f53cfc",
+        "S2B_MSIL2A_20230724T031529_R118_T48NUG_20241014T021553": "eadad1299c7f2429794e4dd6d589833a2124ec95304e0de17af9d32d3fb4987f",
+        "S2A_MSIL2A_20230917T031521_R118_T48NUG_20241018T143743": "fa0e0c08edab17a5b62c3d74e59522972566e3d5003ed2ec943f1ba95d1b4b1a",
+        "S2A_MSIL2A_20230927T031521_R118_T48NUG_20230927T092126": "4fb98c10366b68842edd7ede36e3c0d0e38e0ec7eb7afbb32987e633efa460a8"
+      },
+      "prediction_sha256": "226c88d0a876ebe07454f96f6e0b901dc699b333a3c9b9e205edbdad4632981c"
+    },
+    "2024": {
+      "year": 2024,
+      "tensorflow": "2.16.1",
+      "halo_px": 48,
+      "tile_px": 512,
+      "model_sha256": {
+        "saved_model.pb": "e47c4eafa62656b688893a4d86f67f0ad9e08baaf5b5b1ce2f320208b08d4b18",
+        "variables/variables.data-00000-of-00001": "c4a38299f2c0a741682cbe48810d55afdc832ff451e3d3708082751fe655fcb1",
+        "variables/variables.index": "f27000c6a3d7dcd3e76e333331b108697712c734d5d5ef11b3f34571027c8436"
+      },
+      "manifest_sha256": "300e3e6ebba431e7dc8117024aef88909f2443e927e9e80ffaa7bdc30e0dcb9f",
+      "input_sha256": {
+        "S2B_MSIL2A_20240628T031519_R118_T48NUG_20240628T084735": "3922e931df9fa126418ebeb2d0d6685c6754930e6e58a474e29d9346ed42a72d",
+        "S2B_MSIL2A_20240718T031519_R118_T48NUG_20240718T083051": "4b5461c1749741a59f114ffe6a4c0118290781246ed5fa8cda165ec02efd0499",
+        "S2B_MSIL2A_20240728T031519_R118_T48NUG_20240728T071428": "511d4248c5f8aab5590790b498ac0c25e2c821cad73a4d830fe8afbd83e969d7",
+        "S2A_MSIL2A_20240822T031541_R118_T48NUG_20240822T102201": "d5bb556d5b5f5cf75feb46eb13705807042bbaf99751e5b487002f4810d5831d",
+        "S2A_MSIL2A_20240901T031541_R118_T48NUG_20240901T095059": "36073316d5cc0fdf9413d0f3f687f0f5af5f8c0c0ba64219407ba8e26a156e55"
+      },
+      "prediction_sha256": "cb4fc3f10edf94b287ae53c52b31259712a7a4bb080e5ceb87a8fdca1f701263"
+    },
+    "2025": {
+      "year": 2025,
+      "tensorflow": "2.16.1",
+      "halo_px": 48,
+      "tile_px": 512,
+      "model_sha256": {
+        "saved_model.pb": "e47c4eafa62656b688893a4d86f67f0ad9e08baaf5b5b1ce2f320208b08d4b18",
+        "variables/variables.data-00000-of-00001": "c4a38299f2c0a741682cbe48810d55afdc832ff451e3d3708082751fe655fcb1",
+        "variables/variables.index": "f27000c6a3d7dcd3e76e333331b108697712c734d5d5ef11b3f34571027c8436"
+      },
+      "manifest_sha256": "300e3e6ebba431e7dc8117024aef88909f2443e927e9e80ffaa7bdc30e0dcb9f",
+      "input_sha256": {
+        "S2B_MSIL2A_20250703T031519_R118_T48NUG_20250703T065521": "eafb99186c4b56f36c06b756a6d6ad7b6a1417069b0a8af6122f88af3b89cf89",
+        "S2C_MSIL2A_20250718T031601_R118_T48NUG_20250718T083115": "f2d0bc3cb15701f7883b88b1fd7712882a9d7435fca28f06827367133453d565",
+        "S2B_MSIL2A_20250802T031519_R118_T48NUG_20250802T065803": "41f53d26f568761ab5285eecff38076c0356ef0d60ff5a01c318a4f271121857",
+        "S2B_MSIL2A_20250822T031519_R118_T48NUG_20250822T065722": "0ff58e17a5ef4ef47b5ca5643cc107ffa31f4dabaae9eb045ddac81e9a5634e0",
+        "S2C_MSIL2A_20250906T031601_R118_T48NUG_20250906T081115": "39e0379289135b80e140ce9ebdaca259c82143ee92f64e6aefb79ba26b65151b"
+      },
+      "prediction_sha256": "5bb85fac181c54505c4536868cbc5110414fe89508eee74be23c0b3fb1304601"
+    }
+  },
+  "snapshot_sha256": {
+    "paired_product_cover.csv": "9ecd2a2f3db19cc13c0c57f91992d0d8f0dc333cb1d30e3b94faaec452e5b66a",
+    "optical_pixel_counts.csv": "5fc379e98734f5889d3f1e9b0b49f7e867d0451b4e0164cacbb77cdf8972221b",
+    "case_chips.npz": "86e5179ddaee9be62d4a815883a17ebbdf074adfe672825ab31d49c4d9427b07"
+  }
+}

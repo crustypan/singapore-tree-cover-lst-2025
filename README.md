@@ -2,6 +2,12 @@
 
 This study uses seven clear-sky Landsat 8/9 overpasses in 2025 and eight validation overpasses in 2023–24 to ask whether parts of Singapore with more tree cover had cooler daytime surfaces, and whether the association varied with built-area cover. It combines 10 m land-cover classifications and Landsat surface-temperature measurements on a 500 m grid.
 
+## Stage 4 land-cover and comparison-support audit
+
+The original Esri built-share stability rule alone reduced the number of blocks supporting the 65% built reference from **13 to 1**. The full stability rule reduced it to zero. Original Sentinel-2 images showed coherent surface changes in seven of 19 reviewed cells. Reconstructing Dynamic World from the released model provided a second classification. With all clear labels and a shared optical footprint, Esri and Dynamic World both supported the two-band contrast on **two** common blocks. The 65% reference lost support under stable shares in each product.
+
+[Stage 4 method and findings](docs/COVER_SUPPORT_AUDIT_RESULTS.md) · [Original images](results/cover_support_audit/figures/original_scene_examples.png) · [Comparison counts](results/cover_support_audit/figures/support_counts.png)
+
 ## Stage 3 validation on additional overpasses
 
 The 30 remaining 2025 Tier 1 scenes supplied zero qualifying dates under the original scene screen. Six scenes from 2023 and two from 2024 qualified, covering all four calendar periods. On these eight dates, ten more percentage points of tree cover was associated with **0.49 °C lower daytime surface temperature** within a date and 4 km area [−0.57, −0.43]. The original estimate was 0.48 °C lower. The pooled 85%-minus-65% built-cover difference was **+0.50 °C** [−0.21, +1.16], and the point estimate was **−0.18 °C** on the subset of shared block-dates. Both approximate 95% intervals for the built-cover difference span zero.
