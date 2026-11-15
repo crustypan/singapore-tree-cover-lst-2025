@@ -1,0 +1,94 @@
+{
+  "dates": [
+    "2025-01-03",
+    "2025-02-04",
+    "2025-05-03",
+    "2025-07-06",
+    "2025-10-02",
+    "2025-10-18",
+    "2025-12-05"
+  ],
+  "all_usable_cells": 2491,
+  "all_usable_cell_dates": 14678,
+  "world_500_decompressed_sha256": "1714ed37bdc20077186b15d9817c48498d221401c2fb8dacdf99547c35ce1792",
+  "tree_radius_pp": 5.0,
+  "built_radius_pp_exclusive": 10.0,
+  "chosen": {
+    "tree_start_pct": 2.5,
+    "tree_end_pct": 12.5,
+    "lower_built_pct": 65,
+    "higher_built_pct": 85,
+    "built_gap_pp": 20,
+    "minimum_tight_endpoint_cells": 8,
+    "shared_blocks": 6,
+    "shared_dates": 7,
+    "shared_block_dates": 36,
+    "shared_strict_blocks": 1,
+    "shared_strict_block_dates": 6,
+    "shared_strict_dates": 6
+  },
+  "band_support": {
+    "lower": {
+      "tree_start_pct": 2.5,
+      "tree_end_pct": 12.5,
+      "built_reference_pct": 65.0,
+      "feasible_reference": true,
+      "low_endpoint_cells": 61,
+      "high_endpoint_cells": 19,
+      "low_tight_endpoint_cells": 26,
+      "high_tight_endpoint_cells": 8,
+      "endpoint_blocks": 7,
+      "endpoint_block_dates": 40,
+      "endpoint_dates": 7,
+      "strict_blocks": 3,
+      "strict_dates": 7,
+      "strict_block_dates": 17,
+      "strict_candidate_links": 32,
+      "strict_low_cells": 6,
+      "strict_high_cells": 4
+    },
+    "higher": {
+      "tree_start_pct": 2.5,
+      "tree_end_pct": 12.5,
+      "built_reference_pct": 85.0,
+      "feasible_reference": true,
+      "low_endpoint_cells": 218,
+      "high_endpoint_cells": 102,
+      "low_tight_endpoint_cells": 71,
+      "high_tight_endpoint_cells": 43,
+      "endpoint_blocks": 34,
+      "endpoint_block_dates": 210,
+      "endpoint_dates": 7,
+      "strict_blocks": 14,
+      "strict_dates": 7,
+      "strict_block_dates": 86,
+      "strict_candidate_links": 181,
+      "strict_low_cells": 26,
+      "strict_high_cells": 20
+    }
+  },
+  "narrower_window_shared_blocks": 1,
+  "narrower_window_shared_strict_blocks": 1,
+  "sample_by_band": {
+    "higher": {
+      "cell_dates": 1452,
+      "distinct_cells": 249,
+      "shared_cell_dates": 257,
+      "shared_distinct_cells": 46
+    },
+    "lower": {
+      "cell_dates": 189,
+      "distinct_cells": 35,
+      "shared_cell_dates": 147,
+      "shared_distinct_cells": 24
+    }
+  },
+  "design_sha256": {
+    "band_support.csv": "507c0ad1bb84e238cea3241454375c1411fd9511cb8815efac985d8dae6b8e94",
+    "fit_sample.csv": "d40b3298dc872e7334afbae035784b19480a8bfaec46ad5055939d4dd762d448",
+    "joint_density.csv": "0fc8de5e4b18deae962fff60d041093daa2a8c4b5764fd74fdc84d53dbf6752f",
+    "selected_block_dates.csv": "62400f2fbcb36e0d85d5edbb1697aa7f6be263692a5805841aef8954a3a35881",
+    "shared_support.csv": "dd2eb8b81a03ce73bc29f82a92190c1c62db11876f400e66f72d6592a8cbf440",
+    "strict_pairs.csv": "938e900cb81782dd0ffa4508497d36d253c38fe4acd897557e69710931d92dc1"
+  }
+}
