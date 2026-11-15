@@ -2,6 +2,38 @@
 
 Use the environment and commands in the [README](../README.md). All code runs from the repository root. The pipeline writes new download caches and intermediate products inside the project. The result paths passed to each script can point to a new directory for comparison against the checked-in outputs.
 
+## Stage 5 tree-for-rangeland substitution
+
+The frozen design supplies the 15-date comparison registry, class fractions and water distances. Use the archived design to reproduce the estimates and figures. To rebuild the design from the original spatial inputs, run the preparation step as well. The preparation script verifies each annual Esri window, fetching missing windows via the Stage 3 loader. The archived SLA GeoJSON fixes the map edition for the water calculation.
+
+```bash
+.venv/bin/python -B scripts/fetch_inputs.py spatial
+# Optional rebuild from the source rasters
+.venv/bin/python -B scripts/prepare_grass_tree_substitution.py \
+  --output .scratch/substitution-repro/design
+
+design=results/grass_tree_substitution/design
+.venv/bin/python -B scripts/analyze_grass_tree_substitution.py --design "$design" \
+  --output .scratch/substitution-repro/analysis
+.venv/bin/python -B scripts/plot_grass_tree_substitution.py --design "$design" \
+  --output .scratch/substitution-repro/figures/comparable_grids.png
+.venv/bin/python -B scripts/plot_grass_tree_substitution.py --analysis .scratch/substitution-repro/analysis \
+  --output .scratch/substitution-repro/figures/temperature_contrasts.png
+```
+
+Set `design=.scratch/substitution-repro/design` to use the rebuilt design. The comparable-grids figure also reads the original URA boundary. The estimate script verifies the frozen inputs, uses all temperatures on the locked pair list, and reports the change between models from common spatial resamples.
+
+| File | Contents |
+| --- | --- |
+| [Design record](../results/grass_tree_substitution/design/design_record.json) | Matched sample totals, cutoffs and SHA-256 checks. |
+| [Cell-date support](../results/grass_tree_substitution/design/cell_date_support.csv) and [counts by date](../results/grass_tree_substitution/design/support_by_date.csv) | Eligible IDs, number of qualifying links, disjoint pairing flags and geographic support. |
+| [Annual cell covariates](../results/grass_tree_substitution/design/cell_covariates.csv) and [water components](../results/grass_tree_substitution/design/water_components.csv) | Class counts, cover shares and distances, plus inland water component areas and source names. |
+| [Primary pairs](../results/grass_tree_substitution/design/pairs_primary.csv) and [tighter pairs](../results/grass_tree_substitution/design/pairs_tighter.csv) | Date, ordered grid IDs, spatial block, center separation and cover gaps. |
+| [Estimates](../results/grass_tree_substitution/analysis/estimates.csv) and [analysis record](../results/grass_tree_substitution/analysis/analysis_record.json) | Same-sample model estimates and changes, bootstrap counts, pair-list hashes and coefficients. |
+| [Pair balance](../results/grass_tree_substitution/analysis/pair_balance_by_date.csv), [LST differences](../results/grass_tree_substitution/analysis/paired_temperatures.csv) and [date influence](../results/grass_tree_substitution/analysis/leave_one_overpass_out.csv) | Actual contrasts and balance per date, temperatures at the two endpoints, and the result after leaving out each overpass. |
+
+[Protocol](GRASS_TREE_SUBSTITUTION_PROTOCOL.md) · [Results](GRASS_TREE_SUBSTITUTION_RESULTS.md)
+
 ## Stage 4 land-cover and comparison-support audit
 
 The committed cover table and source-image chips can reproduce the support counts and figures without an Earth Engine account. The case review table records interpretation of the chips. The archived Sentinel-2 manifest fixes the optical dates and unsigned source URLs.

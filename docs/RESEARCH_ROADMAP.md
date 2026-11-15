@@ -75,3 +75,9 @@ Use the Stage 3 loss of the high-tree endpoint at 65% built cover to define the 
 ## Research record and handoff
 
 Run each stage in the independent laboratory-server project. Commit the analysis decisions before fitting, then version the code, input and output manifests, figures, sensitivity results, and English findings in the dedicated GitHub repository. Keep the dated 2025 baseline available for comparison. Record actual applicant contributions when methodological choices, results review, or interpretation take place, along with AI-assisted work. A stage is ready to share once its sample, estimates, and figures can be reproduced and its conclusion matches its sampled dates and geographic support.
+
+## Stage 5 Tree cover replacing grass and shrub cover
+
+**Question.** Within the same date and nearby area, how does daytime LST differ for ten points more tree cover and ten points less mapped rangeland at a fixed built-area share? How much does that estimate change when the same pairs are adjusted for proximity to the coast and large inland water?
+
+Use annual class counts and the existing overpass registry to find direct support for the exchange. Hold the comparison geography fixed across the models including water distances. Record the remaining support, the two estimates, their paired difference, and sensitivity to tighter matching and the water-distance definition. The protocol and pair registry were committed before fitting temperatures. [Stage 5 protocol](GRASS_TREE_SUBSTITUTION_PROTOCOL.md) · [Results](GRASS_TREE_SUBSTITUTION_RESULTS.md) · [Reproduction](REPRODUCE.md#stage-5-tree-for-rangeland-substitution)

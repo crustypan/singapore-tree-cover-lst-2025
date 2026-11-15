@@ -40,7 +40,7 @@ def support_figure(design, map_path, output):
     cmap = ListedColormap([GRAY, GOLD, GREEN])
     fig = plt.figure(figsize=(11.8, 8.4))
     grid = fig.add_gridspec(2, 1, left=0.075, right=0.965, top=0.845, bottom=0.155,
-                            hspace=0.28, height_ratios=[1.8, 1])
+                            hspace=0.34, height_ratios=[2, 1])
     heading(fig, "Where the tree-for-rangeland comparison is supported",
             "500 m cells in Singapore · 15 daytime Landsat overpasses, 2023–25")
     ax = fig.add_subplot(grid[0])
@@ -58,8 +58,8 @@ def support_figure(design, map_path, output):
         Patch(fc=GREEN, label="Paired on ≥1 overpass"),
         Patch(fc=WATER_FILL, label="Mapped inland water ≥0.25 km²"),
     ]
-    ax.legend(handles=handles, loc="lower center", ncols=2, frameon=False, fontsize=8.5,
-              bbox_to_anchor=(0.50, -0.01), handlelength=1.15)
+    ax.legend(handles=handles, loc="upper center", ncols=4, frameon=False, fontsize=8.5,
+              bbox_to_anchor=(0.50, -0.015), handlelength=1.15)
     ax = fig.add_subplot(grid[1])
     x = np.arange(len(days))
     ax.bar(x, days.candidate_cells, color="#ead7a6", width=0.68, label="Candidate cells")

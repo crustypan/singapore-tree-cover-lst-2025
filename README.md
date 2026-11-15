@@ -2,6 +2,12 @@
 
 This study uses seven clear-sky Landsat 8/9 overpasses in 2025 and eight validation overpasses in 2023–24 to ask whether parts of Singapore with more tree cover had cooler daytime surfaces, and whether the association varied with built-area cover. It combines 10 m land-cover classifications and Landsat surface-temperature measurements on a 500 m grid.
 
+## Stage 5 tree cover replacing grass and shrub cover
+
+Fifteen clear-sky overpasses supplied 216 nearby pairs across 94 distinct 500 m cells. At comparable built cover, a ten-percentage-point shift from mapped grass and shrub cover to tree cover corresponded to **0.355 °C lower daytime surface temperature**. Adding distance to the coast and large inland water on the same pairs gave **0.379 °C lower**, with a 95% spatial-bootstrap interval of **−1.22 to +0.18 °C**. The paired change between models was **−0.024 °C** [−0.37, +0.20]. The median built share in the paired cell-years was 4.0%, reflecting where the land-cover exchange had local support.
+
+[Stage 5 methods and findings](docs/GRASS_TREE_SUBSTITUTION_RESULTS.md) · [Comparable grid map](results/grass_tree_substitution/figures/comparable_grids.png) · [Estimates and sensitivity figure](results/grass_tree_substitution/figures/temperature_contrasts.png)
+
 ## Stage 4 land-cover and comparison-support audit
 
 The original Esri built-share stability rule alone reduced the number of blocks supporting the 65% built reference from **13 to 1**. The full stability rule reduced it to zero. Original Sentinel-2 images showed coherent surface changes in seven of 19 reviewed cells. Reconstructing Dynamic World from the released model provided a second classification. With all clear labels and a shared optical footprint, Esri and Dynamic World both supported the two-band contrast on **two** common blocks. The 65% reference lost support under stable shares in each product.
