@@ -1,0 +1,71 @@
+{
+  "dates": [
+    "2025-01-03",
+    "2025-02-04",
+    "2025-05-03",
+    "2025-07-06",
+    "2025-10-02",
+    "2025-10-18",
+    "2025-12-05"
+  ],
+  "bootstrap_seed": 20251116,
+  "frozen_design_sha256": "2331dd734aedfd85de2a7372c226ea7fd1f9298f08b8d2d75bed12eafad3bc4e",
+  "within_area": {
+    "estimate_c_per_10pp": -0.47969879082208466,
+    "lower_c": -0.5664920880037655,
+    "upper_c": -0.40036478565368955,
+    "cell_dates": 14641,
+    "distinct_cells": 2486,
+    "dates": 7,
+    "bootstrap_blocks": 73,
+    "draws_requested": 1999,
+    "draws_retained": 1999,
+    "status": "estimated",
+    "within_r2": 0.5495662839247126,
+    "rmse_c": 1.7326638349077081,
+    "date_by_block_groups": 469,
+    "coef": {
+      "tree": -0.47969879082208466,
+      "built": 0.27311701837339364,
+      "built_squared": 0.035834487656832496,
+      "land_share": 2.5406210240412848
+    }
+  },
+  "nearby_pairs": {
+    "estimate_c_per_10pp": -0.7402209815091171,
+    "lower_c": -1.055557507223991,
+    "upper_c": -0.41579761645815716,
+    "raw_difference_c": -0.7327724900242728,
+    "raw_lower_c": -1.0417857303497868,
+    "raw_upper_c": -0.4164091622792067,
+    "cell_dates": 862,
+    "distinct_cells": 160,
+    "dates": 7,
+    "bootstrap_blocks": 34,
+    "pairs": 431,
+    "draws_requested": 1999,
+    "draws_retained": 1999,
+    "status": "estimated"
+  },
+  "regression_on_matched_cells": {
+    "estimate_c_per_10pp": -0.4589967629812942,
+    "lower_c": -0.750201359013192,
+    "upper_c": -0.23027892800913893,
+    "cell_dates": 862,
+    "distinct_cells": 160,
+    "dates": 7,
+    "bootstrap_blocks": 34,
+    "draws_requested": 1999,
+    "draws_retained": 1999,
+    "status": "estimated",
+    "within_r2": 0.6463055339390821,
+    "rmse_c": 1.2064670768904224,
+    "date_by_block_groups": 194,
+    "coef": {
+      "tree": -0.4589967629812942,
+      "built": 0.3070175062105034,
+      "built_squared": 0.060490597143864504,
+      "land_share": 4.785288911784164
+    }
+  }
+}

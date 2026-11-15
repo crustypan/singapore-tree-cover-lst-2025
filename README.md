@@ -2,7 +2,13 @@
 
 This study uses seven clear-sky Landsat 8/9 overpasses in 2025 to ask whether parts of Singapore with more tree cover had cooler daytime surfaces, and whether the association varied with built-area cover. It combines 10 m land-cover classifications and Landsat surface-temperature measurements on a 500 m grid.
 
-## Results
+## Stage 1 local comparisons
+
+Within the same Landsat date and 4 km area, a 10-percentage-point higher tree share was associated with **0.48 °C lower daytime land surface temperature** after accounting for built cover and land share. The approximate 95% spatial-bootstrap interval was **0.40–0.57 °C lower**. The regression used 14,641 cell-dates and 2,486 distinct 500 m cells. In 431 disjoint same-date pairs with comparable built and land shares, the estimated difference was 0.74 °C lower, with an interval of 0.42–1.06 °C lower. The paired cells cover a smaller and greener part of Singapore's usable sample.
+
+[Stage 1 results and diagnostics](docs/LOCAL_COMPARISON_RESULTS.md) · [Frozen pairing protocol](docs/LOCAL_COMPARISON_PROTOCOL.md) · [Map of comparable cells](results/local_comparison/design/comparable_grid_cells.png)
+
+## Baseline results
 
 The main analysis uses **14,678 observations across 2,491 grid cells**. At 50% built-area cover, cells with 10 percentage points more tree cover had **0.73 °C lower daytime land surface temperature** on average within an overpass, with an approximate 95% spatial-bootstrap interval of **0.61 to 0.82 °C lower**.
 

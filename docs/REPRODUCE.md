@@ -2,6 +2,23 @@
 
 Use the environment and commands in the [README](../README.md). All code runs from the repository root. The pipeline writes new download caches and intermediate products inside the project. The result paths passed to each script can point to a new directory for comparison against the checked-in outputs.
 
+## Stage 1 Local comparisons
+
+The design uses the archived 500 m input panel and the baseline usable cell-date IDs. The source rasters supply the map boundary and Esri class counts. Generate the design and its map before fitting the models.
+
+```bash
+.venv/bin/python -B scripts/fetch_inputs.py spatial
+.venv/bin/python -B scripts/prepare_local_comparison.py --output .scratch/local-reproduction/design
+.venv/bin/python -B scripts/plot_local_design.py --design .scratch/local-reproduction/design \
+  --output .scratch/local-reproduction/design/comparable_grid_cells.png
+.venv/bin/python -B scripts/analyze_local_comparison.py --design .scratch/local-reproduction/design \
+  --output .scratch/local-reproduction/analysis
+.venv/bin/python -B scripts/plot_local_results.py --results .scratch/local-reproduction/analysis \
+  --output .scratch/local-reproduction/figures
+```
+
+The committed design contains the three lists of disjoint pairs, a table of matched dates by cell, per-date counts, counts of Esri classes per cell, and input and design SHA-256 hashes. Start at the analysis step and use `--design results/local_comparison/design` to fit from the frozen design and temperature panel. Results include the oriented temperature contrasts, sample and balance diagnostics, regression residuals, and sensitivity tables. [Protocol](LOCAL_COMPARISON_PROTOCOL.md) · [Stage 1 results](LOCAL_COMPARISON_RESULTS.md) · [Design record](../results/local_comparison/design/design_record.json)
+
 ## Landsat association study
 
 | File | Contents |

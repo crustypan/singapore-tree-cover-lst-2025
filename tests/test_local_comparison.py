@@ -1,7 +1,9 @@
 import unittest
 
+import numpy as np
 import pandas as pd
 
+from analyze_local_comparison import draw_totals, estimate_pairs, within_model
 from prepare_local_comparison import MatchRule, build_matches, match_group, minimum_cost_pairs
 
 
@@ -34,3 +36,46 @@ class MatchDesign(unittest.TestCase):
         self.assertTrue(pairs.empty)
         pairs, _, _, _ = build_matches(obs, MatchRule(block_shift=2000))
         self.assertEqual(list(pairs.date), ["d1"])
+
+
+class LocalEstimation(unittest.TestCase):
+    def test_within_model_handles_varying_date_by_area_baselines(self):
+        rng = np.random.default_rng(802)
+        panels = []
+        for block in range(5):
+            for date in ["2025-01-03", "2025-02-04"]:
+                n = 25 if date == "2025-01-03" else 14
+                t = rng.uniform(0.05, 0.30, n)
+                b = rng.uniform(0.35, 0.55, n)
+                land = rng.uniform(0.5, 1, n)
+                bb = (b - 0.5) * 10
+                y = rng.normal() * 3 - 0.65 * (t - 0.25) * 10 + bb + bb ** 2 + 3 * land
+                panels.append(pd.DataFrame({
+                    "date": date, "cell_id": [f"{block}_{i}" for i in range(n)],
+                    "easting_m": block * 4000 + 250, "northing_m": 250,
+                    "tree_fraction": t, "built_fraction": b, "land_share": land,
+                    "response_c": y,
+                }))
+        fit, fitted, boot = within_model(pd.concat(panels), draws=19)
+        self.assertAlmostEqual(fit["estimate_c_per_10pp"], -0.65)
+        np.testing.assert_allclose(boot[:, 0], -0.65, atol=1e-9)
+        np.testing.assert_allclose(fitted.residual_c, 0, atol=1e-9)
+
+    def test_pairs_weight_dates_equally(self):
+        pairs = pd.DataFrame({
+            "date": ["d1", "d1", "d2"], "block_e": [1, 2, 2], "block_n": [0, 0, 0],
+            "lower_tree_cell": ["a", "b", "b"], "higher_tree_cell": ["c", "d", "d"],
+            "lst_per_10pp_c": [-2., -4., -1.], "lst_gap_c": [-2., -4., -1.],
+        })
+        fit = estimate_pairs(pairs, draws=0)
+        self.assertAlmostEqual(fit["estimate_c_per_10pp"], -2.0)
+        self.assertIsNone(fit["lower_c"])
+
+    def test_bootstrap_preserves_all_dates_of_a_block(self):
+        date = ["d1", "d2", "d1", "d2"]
+        cluster = np.array([[0, 0], [0, 0], [0, 1], [0, 1]])
+        value = np.array([[1.], [2.], [10.], [20.]])
+        draws, n = draw_totals(value, cluster, date, 31)
+        self.assertEqual(n, 2)
+        np.testing.assert_array_equal(draws[:, 0, 0], draws[:, 1, 0])
+        np.testing.assert_array_equal(2 * draws[:, 0, 1], draws[:, 1, 1])
