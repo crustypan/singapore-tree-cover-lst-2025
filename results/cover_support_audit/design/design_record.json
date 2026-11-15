@@ -1,0 +1,28 @@
+{
+  "years": [
+    2023,
+    2024,
+    2025
+  ],
+  "common_cells": 2442,
+  "critical_cells": 19,
+  "critical_cell_years": {
+    "2023": 5,
+    "2024": 10,
+    "2025": 7
+  },
+  "target": {
+    "tree_start_pct": 2.5,
+    "tree_end_pct": 12.5,
+    "lower_built_pct": 65,
+    "higher_built_pct": 85
+  },
+  "stability_max_pp": 5,
+  "stage3_design_sha256": "4fcb589ebdef431f6dd0da828ad273179fb54ac61e65ce37a353ac8cf7c7c25a",
+  "stage2_design_sha256": "e2384e7b0486918a0509302f0c6006d64b83efbe1ea4d3bdf20d9f14ac581c9d",
+  "files_sha256": {
+    "critical_cells.csv": "6b30040c0cdb3e93a4bcbee4a1e0083b33d66c34aa261270bede6ab630b08597",
+    "esri_filter_block_dates.csv": "995a7dde5b44f99114f056ab4dee0544305c813f987f10181f70442cfbb54148",
+    "esri_filter_counts.csv": "6d46fe49e458b789f317eca169c5e8de8f36c49892535c5b1c6fcc2990862958"
+  }
+}
