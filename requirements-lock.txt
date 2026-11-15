@@ -9,6 +9,7 @@ cycler==0.12.1
 fonttools==4.65.0
 kiwisolver==1.5.1
 matplotlib==3.10.1
+networkx==3.4.2
 numpy==1.26.4
 packaging==26.3
 pandas==2.2.3
