@@ -1,0 +1,31 @@
+{
+  "stage6_design_sha256": "87d510754535e2390c999e7d51265ba6a05dac9c10eb1de10bf9618de0580b16",
+  "stage3_design_sha256": "4fcb589ebdef431f6dd0da828ad273179fb54ac61e65ce37a353ac8cf7c7c25a",
+  "omitted_blocks": [
+    [
+      89,
+      36
+    ],
+    [
+      91,
+      35
+    ]
+  ],
+  "wider_only_pair_observations": 9,
+  "distinct_sites": 3,
+  "dates": [
+    "2024-03-13",
+    "2025-01-03",
+    "2025-02-04",
+    "2025-05-03",
+    "2025-07-06",
+    "2025-10-02",
+    "2025-10-18",
+    "2025-12-05"
+  ],
+  "files_sha256": {
+    "pair_registry.csv": "bac5693a0a83831112d600eb465a7ec70955d7aa0591fcf68fba23075d68aee8",
+    "review_sites.csv": "33ddfd6a926a87ad2cf195623f044d2b5510c674dfce31b87975b6b9a32dcd9d",
+    "landsat_sources.csv": "d5ab919a174e0076c72c5a56ef869fa1be750caf7f297654e6e6f18b4494d182"
+  }
+}
