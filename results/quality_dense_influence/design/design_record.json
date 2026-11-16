@@ -1,0 +1,47 @@
+{
+  "stage8_design_sha256": "5e80f6558264ff846102a16db7b9c6f83ffe884d97c7ed992e43412d677f9625",
+  "stage8_analysis_sha256": "aebdb6e47575991198fbda134dc3a3af6d2e4da9f1a6fefa96caa1ad5f3d8c49",
+  "pairs": 9,
+  "block_ids": [
+    [
+      90,
+      39
+    ],
+    [
+      92,
+      36
+    ],
+    [
+      92,
+      39
+    ],
+    [
+      94,
+      38
+    ],
+    [
+      95,
+      37
+    ],
+    [
+      97,
+      36
+    ]
+  ],
+  "dates": [
+    "2023-07-25",
+    "2023-10-13",
+    "2024-03-13",
+    "2024-10-23",
+    "2025-07-06",
+    "2025-12-05"
+  ],
+  "stage8_baseline": {
+    "estimate_c_per_5pp": -0.852211236,
+    "lower_c": -1.213800194,
+    "upper_c": -0.180137746
+  },
+  "design_sha256": {
+    "weighted_pairs.csv": "dbf0f9622b07111bd20f52f3c060a54ffe17865a6dcaa8b6d57593b2d8e479c9"
+  }
+}
