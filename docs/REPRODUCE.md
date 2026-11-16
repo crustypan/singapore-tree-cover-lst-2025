@@ -2,6 +2,31 @@
 
 Use the environment and commands in the [README](../README.md). All code runs from the repository root. The pipeline writes new download caches and intermediate products inside the project. The result paths passed to each script can point to a new directory for comparison against the checked-in outputs.
 
+## Stage 8 Four-kelvin quality screen in dense built areas
+
+The design reads only area and quality coverage fields from the committed Landsat panels. It uses the same frozen 500 m pairs as Stage 7, verifies both endpoints against the 60% coverage rule and records geographic support before fitting the temperatures.
+
+```bash
+base=.scratch/quality-dense-repro
+.venv/bin/python -B scripts/prepare_quality_dense_swap.py --output "$base/design"
+.venv/bin/python -B scripts/analyze_quality_dense_swap.py --design "$base/design" \
+  --output "$base/analysis"
+.venv/bin/python -B scripts/fetch_inputs.py spatial
+.venv/bin/python -B scripts/plot_quality_dense_swap.py --design "$base/design" \
+  --analysis "$base/analysis" --output "$base/figures"
+```
+
+Pass `--verify-pixels` to both preparation and estimation to replay the original native Landsat windows for the specified endpoints. That option uses the study-land mask and original rasters from Stages 1 and 3, with their recorded hashes. Without it the analysis uses the committed panels. The map reads the original URA boundary.
+
+| File | Contents |
+| --- | --- |
+| [Endpoint coverage](../results/quality_dense_swap/design/endpoint_coverage.csv) and [pair flags](../results/quality_dense_swap/design/pair_coverage.csv) | Exact land counts, QA4 counts, the two-endpoint eligibility decision and whether a pair remains after omitting both blocks. |
+| [Total support](../results/quality_dense_swap/design/support_summary.csv), [per-date support](../results/quality_dense_swap/design/support_by_date.csv) and [design record](../results/quality_dense_swap/design/design_record.json) | Dates, geographically distinct comparisons, block counts, model support and design hashes. |
+| [Estimates](../results/quality_dense_swap/analysis/estimates.csv) and [omission changes](../results/quality_dense_swap/analysis/omission_changes.csv) | Matched and eligible adjusted contrasts, intervals and pairwise before-and-after changes. |
+| [Qualified temperatures](../results/quality_dense_swap/analysis/qa4_paired_temperatures.csv) and [analysis record](../results/quality_dense_swap/analysis/analysis_record.json) | Endpoint temperatures used in the fit, observed cover gaps and output checksums. |
+
+[Protocol](QUALITY_DENSE_SWAP_PROTOCOL.md) · [Results](QUALITY_DENSE_SWAP_RESULTS.md)
+
 ## Stage 7 Audit of the wider-only dense-area pairs
 
 The Git snapshot contains the raw Landsat and Sentinel-2 digital numbers for the image windows, the transforms and annual labels, and the source manifests. Reproduce the temperature-quality audit, the block omission, and the figures using the committed inputs.

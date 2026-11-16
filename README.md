@@ -2,6 +2,12 @@
 
 This study uses seven clear-sky Landsat 8/9 overpasses in 2025 and eight validation overpasses in 2023–24 to ask whether parts of Singapore with more tree cover had cooler daytime surfaces, and whether the association varied with built-area cover. It combines 10 m land-cover classifications and Landsat surface-temperature measurements on a 500 m grid.
 
+## Stage 8 dense-area contrasts under the 4 K quality screen
+
+The specified uncertainty, cloud distance and endpoint coverage requirements retained **12 of 36 primary pairs and 13 of 44 wider pairs**, each in eight blocks. After omitting both Stage 7 blocks, the same nine observations remained under both rules. The five-point matched difference was **−0.85 °C** [−1.21, −0.18]. This moves the primary 4 K estimate by **+0.21 °C** [−0.45, +1.14] and the wider 4 K estimate by **−0.28 °C** [−0.94, +0.13].
+
+[Stage 8 methods and findings](docs/QUALITY_DENSE_SWAP_RESULTS.md) · [Retained coverage and blocks](results/quality_dense_swap/figures/quality_support.png) · [Five-point estimates](results/quality_dense_swap/figures/quality_temperature_contrasts.png)
+
 ## Stage 7 image and temperature review of the wider-only pairs
 
 Seven of the nine wider-only observations came from one Bukit Merah pair. Its higher-tree cell was **1.59–4.56 °C warmer** across the seven original Landsat overpasses. Across the nine observations, two had sufficient coverage at both endpoints after the 4 K and cloud-distance screen. After removing both contributing blocks, the two matching rules retained the same 28 records and gave **−0.50 °C per five points** [−1.01, +0.45]. This moves the primary estimate by **+0.52 °C** and the wider estimate by **−0.59 °C**.

@@ -1,0 +1,9 @@
+case,sample,model,status,pairs,spatial_pairs,dates,blocks,adjustment_draws_retained,rank_after_each_block_omission,estimate_c_per_5pp,lower_c,upper_c,draws_retained
+dense,qa4_full,matched,estimated,12,10,7,8,1777,True,-1.062590131,-1.733291832,-0.201219243,1999.000000000
+dense,qa4_full,adjusted,adjustment has fewer than 95% full-rank draws,12,10,7,8,1777,True,,,,
+dense,qa4_omit_both,matched,estimated,9,7,6,6,1658,True,-0.852211236,-1.213800194,-0.180137746,1999.000000000
+dense,qa4_omit_both,adjusted,adjustment has fewer than 95% full-rank draws,9,7,6,6,1658,True,,,,
+wider_balance,qa4_full,matched,estimated,13,11,7,8,1947,True,-0.573822542,-1.097926779,0.337963186,1947.000000000
+wider_balance,qa4_full,adjusted,estimated,13,11,7,8,1947,True,-0.613622136,-2.471080268,0.722991486,1947.000000000
+wider_balance,qa4_omit_both,matched,estimated,9,7,6,6,1658,True,-0.852211236,-1.213800194,-0.180137746,1999.000000000
+wider_balance,qa4_omit_both,adjusted,adjustment has fewer than 95% full-rank draws,9,7,6,6,1658,True,,,,

@@ -1,0 +1,10 @@
+{
+  "design_sha256": "5e80f6558264ff846102a16db7b9c6f83ffe884d97c7ed992e43412d677f9625",
+  "draws": 1999,
+  "seed": 20251116,
+  "output_sha256": {
+    "estimates.csv": "733693119fd50139a38636af157f82a375c8970d0b75485cf312db98024d6c05",
+    "omission_changes.csv": "7fa0a67daf0dfc70bdcbe7455109194c99161cfcf8f2ce0b415e9e63970804a8",
+    "qa4_paired_temperatures.csv": "7806d4552ac4cca8803bfcc65b937b8487cf70767641219c1db984ef75767f58"
+  }
+}

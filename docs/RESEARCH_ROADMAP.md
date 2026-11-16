@@ -93,3 +93,9 @@ Compare rangeland availability in each band, then trace which donor cell-dates h
 **Question.** What do the original images and temperature quality records show about the Stage 6 wider-only pairs, and how far does the five-point estimate move when both of their blocks are removed?
 
 Freeze the pair and source-product IDs. Inspect the same-overpass Landsat imagery, quality bands and near-date Sentinel-2 context. Report changes in vegetation and built shares alongside optical differences and the original and stricter temperature screens. Exclude both blocks simultaneously from the frozen primary and wider lists, then summarize the retained observations and the paired change in the estimated contrast. [Stage 7 protocol](INFLUENTIAL_PAIR_AUDIT_PROTOCOL.md) · [Results](INFLUENTIAL_PAIR_AUDIT_RESULTS.md) · [Reproduction](REPRODUCE.md#stage-7-audit-of-the-wider-only-dense-area-pairs)
+
+## Stage 8 Qualified temperatures on all dense-area pairs
+
+**Question.** How many frozen high-built comparisons retain qualifying temperature coverage under the 4 K screen, and how much do the five-point estimates shift after the two influential blocks are omitted?
+
+Apply the 4 K, 0.5 km cloud-distance and 60% per-endpoint conditions to the full original pair lists. Confirm the eligible counts and blocks from the raw quality records before estimating daytime LST differences. Use the Stage 6 support rules and the simultaneous omission from Stage 7. [Stage 8 protocol](QUALITY_DENSE_SWAP_PROTOCOL.md) · [Results](QUALITY_DENSE_SWAP_RESULTS.md) · [Reproduction](REPRODUCE.md#stage-8-four-kelvin-quality-screen-in-dense-built-areas)
