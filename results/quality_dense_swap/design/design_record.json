@@ -1,0 +1,126 @@
+{
+  "stage7_design_sha256": "48fc601a77797813024ca7d56c1187196f7ac8f87ccc9d1b40ef6bfa4ef2d820",
+  "stage6_design_sha256": "87d510754535e2390c999e7d51265ba6a05dac9c10eb1de10bf9618de0580b16",
+  "stage3_design_sha256": "4fcb589ebdef431f6dd0da828ad273179fb54ac61e65ce37a353ac8cf7c7c25a",
+  "omitted_blocks": [
+    [
+      89,
+      36
+    ],
+    [
+      91,
+      35
+    ]
+  ],
+  "qa_rule": {
+    "max_uncertainty_k": 4,
+    "minimum_cloud_distance_km": 0.5,
+    "minimum_land_coverage_per_endpoint": 0.6
+  },
+  "unique_cell_dates": 89,
+  "unique_pair_dates": 45,
+  "support": {
+    "dense": {
+      "original": {
+        "pairs": 36,
+        "spatial_pairs": 12,
+        "dates": 14,
+        "blocks": 9
+      },
+      "qa4_full": {
+        "pairs": 12,
+        "spatial_pairs": 10,
+        "dates": 7,
+        "blocks": 8,
+        "matched_ready": true,
+        "adjusted_ready": false,
+        "max_block_weight": 0.2857142857142857,
+        "effective_blocks": 5.223880597014927,
+        "terms": [
+          "tree_gap_pp",
+          "built_gap_pp",
+          "other_gap_pp",
+          "land_gap_pp"
+        ],
+        "draws_requested": 1999,
+        "adjustment_draws_retained": 1777,
+        "rank_after_each_block_omission": true,
+        "reason": "adjustment has fewer than 95% full-rank draws"
+      },
+      "qa4_omit_both": {
+        "pairs": 9,
+        "spatial_pairs": 7,
+        "dates": 6,
+        "blocks": 6,
+        "matched_ready": true,
+        "adjusted_ready": false,
+        "max_block_weight": 0.3333333333333333,
+        "effective_blocks": 4.075471698113208,
+        "terms": [
+          "tree_gap_pp",
+          "built_gap_pp",
+          "other_gap_pp",
+          "land_gap_pp"
+        ],
+        "draws_requested": 1999,
+        "adjustment_draws_retained": 1658,
+        "rank_after_each_block_omission": true,
+        "reason": "adjustment has fewer than 95% full-rank draws"
+      }
+    },
+    "wider_balance": {
+      "original": {
+        "pairs": 44,
+        "spatial_pairs": 14,
+        "dates": 15,
+        "blocks": 9
+      },
+      "qa4_full": {
+        "pairs": 13,
+        "spatial_pairs": 11,
+        "dates": 7,
+        "blocks": 8,
+        "matched_ready": true,
+        "adjusted_ready": true,
+        "max_block_weight": 0.2857142857142857,
+        "effective_blocks": 5.223880597014927,
+        "terms": [
+          "tree_gap_pp",
+          "built_gap_pp",
+          "other_gap_pp",
+          "land_gap_pp"
+        ],
+        "draws_requested": 1999,
+        "adjustment_draws_retained": 1947,
+        "rank_after_each_block_omission": true,
+        "reason": "ready"
+      },
+      "qa4_omit_both": {
+        "pairs": 9,
+        "spatial_pairs": 7,
+        "dates": 6,
+        "blocks": 6,
+        "matched_ready": true,
+        "adjusted_ready": false,
+        "max_block_weight": 0.3333333333333333,
+        "effective_blocks": 4.075471698113208,
+        "terms": [
+          "tree_gap_pp",
+          "built_gap_pp",
+          "other_gap_pp",
+          "land_gap_pp"
+        ],
+        "draws_requested": 1999,
+        "adjustment_draws_retained": 1658,
+        "rank_after_each_block_omission": true,
+        "reason": "adjustment has fewer than 95% full-rank draws"
+      }
+    }
+  },
+  "design_sha256": {
+    "endpoint_coverage.csv": "4218ebaaef2cccd5cbf76b4b77121fb7b060b0cf89e7661a6a997519055a0ce7",
+    "pair_coverage.csv": "1ffb9a08e65e05b08197c161d8ae5bff7975fea0ae45f5fa959409cf9f35b799",
+    "support_by_date.csv": "34516ed09f60eb2f5d1bfbfb054200b60682c37618875245a7f1a742e6bb28e6",
+    "support_summary.csv": "1ad2623c10213e8a3cbd70185d1adf4f4558ea850beb011932e747726f26fd97"
+  }
+}

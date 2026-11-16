@@ -1,0 +1,7 @@
+case,sample,pairs,spatial_pairs,dates,blocks
+dense,original,36,12,14,9
+dense,qa4_full,12,10,7,8
+dense,qa4_omit_both,9,7,6,6
+wider_balance,original,44,14,15,9
+wider_balance,qa4_full,13,11,7,8
+wider_balance,qa4_omit_both,9,7,6,6
