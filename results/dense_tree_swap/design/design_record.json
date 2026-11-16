@@ -1,0 +1,151 @@
+{
+  "stage5_design_sha256": "4711b31848eb0e825c59c89d2e78411c9260ae737b0fa54a959a39a913f3d826",
+  "comparison_rules": {
+    "10pp": {
+      "target": 0.1,
+      "margin": 0.02,
+      "built_other": 0.05,
+      "combined": 0.02,
+      "land": 0.1,
+      "distance": 2000
+    },
+    "5pp": {
+      "target": 0.05,
+      "margin": 0.01,
+      "built_other": 0.025,
+      "combined": 0.01,
+      "land": 0.1,
+      "distance": 2000
+    },
+    "5pp_stage5_balance": {
+      "target": 0.05,
+      "margin": 0.01,
+      "built_other": 0.05,
+      "combined": 0.02,
+      "land": 0.1,
+      "distance": 2000
+    }
+  },
+  "bands": {
+    "lt50": [
+      0.0,
+      0.5
+    ],
+    "50to70": [
+      0.5,
+      0.7
+    ],
+    "70to80": [
+      0.7,
+      0.8
+    ],
+    "80to90": [
+      0.8,
+      0.9
+    ],
+    "ge90": [
+      0.9,
+      null
+    ],
+    "ge80": [
+      0.8,
+      null
+    ]
+  },
+  "steps": [
+    "eligible",
+    "donor",
+    "opposite_gaps",
+    "cover_balance",
+    "within_2km",
+    "same_block",
+    "matched"
+  ],
+  "adjusted_draw_fraction_minimum": 0.95,
+  "estimation": {
+    "dense": {
+      "comparison": "5pp",
+      "built_band": "ge80",
+      "pairs": 36,
+      "spatial_pairs": 12,
+      "dates": 14,
+      "blocks": 9,
+      "matched_ready": true,
+      "adjusted_ready": false,
+      "max_block_weight": 0.32142857142857145,
+      "effective_blocks": 4.958538299367534,
+      "terms": [
+        "tree_gap_pp",
+        "built_gap_pp",
+        "other_gap_pp",
+        "land_gap_pp"
+      ],
+      "draws_requested": 1999,
+      "adjustment_draws_retained": 1793,
+      "rank_after_each_block_omission": true,
+      "reason": "adjustment has fewer than 95% full-rank draws"
+    },
+    "very_dense": {
+      "comparison": "5pp",
+      "built_band": "ge90",
+      "pairs": 32,
+      "spatial_pairs": 10,
+      "dates": 14,
+      "blocks": 8,
+      "matched_ready": true,
+      "adjusted_ready": false,
+      "max_block_weight": 0.42857142857142855,
+      "effective_blocks": 3.6792157680675786,
+      "terms": [
+        "tree_gap_pp",
+        "built_gap_pp",
+        "other_gap_pp",
+        "land_gap_pp"
+      ],
+      "draws_requested": 1999,
+      "adjustment_draws_retained": 1285,
+      "rank_after_each_block_omission": false,
+      "reason": "adjustment loses rank after omitting a spatial block"
+    },
+    "80_to_90": {
+      "comparison": "5pp",
+      "built_band": "80to90",
+      "pairs": 4,
+      "spatial_pairs": 2,
+      "dates": 4,
+      "blocks": 2,
+      "matched_ready": false,
+      "adjusted_ready": false,
+      "reason": "fewer than three spatial blocks or two overpasses"
+    },
+    "wider_balance": {
+      "comparison": "5pp_stage5_balance",
+      "built_band": "ge80",
+      "pairs": 44,
+      "spatial_pairs": 14,
+      "dates": 15,
+      "blocks": 9,
+      "matched_ready": true,
+      "adjusted_ready": true,
+      "max_block_weight": 0.39999999999999997,
+      "effective_blocks": 4.164524421593831,
+      "terms": [
+        "tree_gap_pp",
+        "built_gap_pp",
+        "other_gap_pp",
+        "land_gap_pp"
+      ],
+      "draws_requested": 1999,
+      "adjustment_draws_retained": 1953,
+      "rank_after_each_block_omission": true,
+      "reason": "ready"
+    }
+  },
+  "design_sha256": {
+    "composition_by_band.csv": "229b4dacf49b296eee416aa3080a7192bc1a509c63eb340a29b2f2006533948b",
+    "pairs.csv": "471ba5831d22d5dbc26028f9c45c0d167d93c73e249f9e889e259bfb6598dfb9",
+    "support_by_date.csv": "5fe656a8ec4ae520315e9cdec8c50858e1e819a6eb5f61dfd2d6a5056b5d3105",
+    "support_by_band.csv": "8f269476f396839c6e6a9acedbf0d217df259bfefac061fe09dd2c0d84419957",
+    "dense_cells.csv.gz": "6048abee054db171acf8d27bbcb848a06e0b838a99052c781a74fe9bfb1f8599"
+  }
+}
