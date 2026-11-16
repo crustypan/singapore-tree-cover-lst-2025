@@ -99,3 +99,9 @@ Freeze the pair and source-product IDs. Inspect the same-overpass Landsat imager
 **Question.** How many frozen high-built comparisons retain qualifying temperature coverage under the 4 K screen, and how much do the five-point estimates shift after the two influential blocks are omitted?
 
 Apply the 4 K, 0.5 km cloud-distance and 60% per-endpoint conditions to the full original pair lists. Confirm the eligible counts and blocks from the raw quality records before estimating daytime LST differences. Use the Stage 6 support rules and the simultaneous omission from Stage 7. [Stage 8 protocol](QUALITY_DENSE_SWAP_PROTOCOL.md) · [Results](QUALITY_DENSE_SWAP_RESULTS.md) · [Reproduction](REPRODUCE.md#stage-8-four-kelvin-quality-screen-in-dense-built-areas)
+
+## Stage 9 Influence of individual overpasses and blocks
+
+**Question.** How much does the five-point matched estimate on the nine Stage 8 observations change when a date or a 4 km block is removed?
+
+List the temperatures and original weights of the nine shared observations. Recompute equal-date weights, the matched estimate, and the spatial intervals after deleting one date or one block at a time. Compare the magnitude and direction of the estimates, their intervals, and the retained geographic support. [Stage 9 protocol](QUALITY_DENSE_INFLUENCE_PROTOCOL.md) · [Results](QUALITY_DENSE_INFLUENCE_RESULTS.md) · [Reproduction](REPRODUCE.md#stage-9-influence-on-the-4-k-result)

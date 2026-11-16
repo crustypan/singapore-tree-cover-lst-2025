@@ -1,0 +1,8 @@
+{
+  "design_sha256": "0ebdb4a9bfe3f21bc031ba708d3a68a6a469b92e8f58eef305aebaca2b54066c",
+  "seed": 20251116,
+  "draws": 1999,
+  "output_sha256": {
+    "leave_one_out.csv": "1dbff69c3993ee440b8ae9a99d398dd9b56db970199e429e0318c36fa241368a"
+  }
+}

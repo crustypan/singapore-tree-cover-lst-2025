@@ -2,6 +2,26 @@
 
 Use the environment and commands in the [README](../README.md). All code runs from the repository root. The pipeline writes new download caches and intermediate products inside the project. The result paths passed to each script can point to a new directory for comparison against the checked-in outputs.
 
+## Stage 9 Influence on the 4 K result
+
+The design verifies the archived Stage 8 pair and temperature records and the identical nine qualifying observations under both rules. Run the following from the repository root using the existing environment.
+
+```bash
+base=.scratch/quality-influence-repro
+.venv/bin/python -B scripts/prepare_quality_dense_influence.py --output "$base/design"
+.venv/bin/python -B scripts/analyze_quality_dense_influence.py --design "$base/design" \
+  --output "$base/analysis"
+.venv/bin/python -B scripts/plot_quality_dense_influence.py --design "$base/design" \
+  --analysis "$base/analysis" --output "$base/figures"
+```
+
+| File | Contents |
+| --- | --- |
+| [Weighted pair ledger](../results/quality_dense_influence/design/weighted_pairs.csv) and [design record](../results/quality_dense_influence/design/design_record.json) | Ordered cell IDs, dates, 4 km blocks, temperature gaps, per-date weights, contributions, and checksums. |
+| [Deletion estimates](../results/quality_dense_influence/analysis/leave_one_out.csv) and [analysis record](../results/quality_dense_influence/analysis/analysis_record.json) | Full and reduced estimates, each omitted group and its original weight, the remaining sample and the resampling settings. |
+
+[Protocol](QUALITY_DENSE_INFLUENCE_PROTOCOL.md) · [Results](QUALITY_DENSE_INFLUENCE_RESULTS.md)
+
 ## Stage 8 Four-kelvin quality screen in dense built areas
 
 The design reads only area and quality coverage fields from the committed Landsat panels. It uses the same frozen 500 m pairs as Stage 7, verifies both endpoints against the 60% coverage rule and records geographic support before fitting the temperatures.
