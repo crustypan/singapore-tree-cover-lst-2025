@@ -1,0 +1,21 @@
+{
+  "design_sha256": "48fc601a77797813024ca7d56c1187196f7ac8f87ccc9d1b40ef6bfa4ef2d820",
+  "grid_crs": "EPSG:32648",
+  "file_sha256": {
+    "cover_A.npz": "9a2a016ac3e1c0db1accbbd9db2c5735b49a6eb03b138c524d6c5622b570ef81",
+    "cover_B.npz": "5691b201220e9c1d8e62bb9a0817538a9d1d1b9f68b18f070322f8730ccb15f9",
+    "cover_C.npz": "19de2d9456a0d7c68b6e7a010fe2fdaab5e11edfcdfcb57d34eee4dfa013a9d4",
+    "landsat_2024-03-13.npz": "37de4274adf8acdd0249dad4d2ce60bcf4754beedf56b859008f39d8ddf12a70",
+    "landsat_2025-01-03.npz": "10f1972efc171ecb1319498fa01bed29a91a9324c68e573e6e0a274ad63d6c66",
+    "landsat_2025-02-04.npz": "0498c79c80e0a18a4ff79483a10a225f5b56a189b5a3732feecce47a120c4f6c",
+    "landsat_2025-05-03.npz": "f37c0c81d506c0daeff392ba58fc3a3c7281aa627b02831aa359e22e7925635f",
+    "landsat_2025-07-06.npz": "a94cccbc6d9d01086c0c5e9ba3644148f0e9e170feed05d7b0824e1f2d675da4",
+    "landsat_2025-10-02.npz": "e0d6a2e2e3bd955d59a7d80359f21c9ffbf82617f5e7b0fecf036d659a8f3ba0",
+    "landsat_2025-10-18.npz": "601ec1fc1729ff6df081a3de75a84f09c44dfa8796be026b1514d6c969abc144",
+    "landsat_2025-12-05.npz": "67fd3a39709df3d06633d35386eb78c28ad7665657674f0060fe3e61e2130b80",
+    "sentinel_A.npz": "1acd4fea953ec68e8a7815d9dfb95e4365dcc4f9a80c418493016ee4cab0f2f1",
+    "sentinel_B.npz": "96c8c4d0432350de2ff68281cb8153ed1590ec3c8cb901428aabb2850e6bc010",
+    "sentinel_C.npz": "802e02226067fe5cb20f1f4cc579b119fe3ac21f64360af5f505265823999cfa",
+    "sentinel_sources.csv": "117a2ba342153db3ca00f27f08368b98b4f8b0a803cf9b33a20e998f7548ed21"
+  }
+}

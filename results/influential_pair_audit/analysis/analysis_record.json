@@ -1,0 +1,11 @@
+{
+  "design_sha256": "48fc601a77797813024ca7d56c1187196f7ac8f87ccc9d1b40ef6bfa4ef2d820",
+  "imagery_sha256": "e311e4b7b5eeb488979abee18a00282418f24e317a1aaf2b96f22a356b1d21d5",
+  "seed": 20251116,
+  "draws": 1999,
+  "output_sha256": {
+    "endpoint_quality.csv": "eef08d781fcc9b5b404fde219ca0425d5bd0038dd3e2e387b257b4ff0597d5fd",
+    "pair_quality.csv": "6d9334e5ef7b456f6a879ddc71af8f23db4816d2a9234a8294c4f73a93e1f860",
+    "sentinel_context.csv": "d756b27296ea8448a18d9d19518da4bb68365f511e700036d71a63908b808e35"
+  }
+}
