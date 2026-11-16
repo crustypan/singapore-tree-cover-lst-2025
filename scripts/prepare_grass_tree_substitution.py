@@ -142,7 +142,7 @@ def build_matches(eligible, rule):
     )
     support["matched"] = support.matched.eq(True)
     counts = pd.DataFrame(daily)
-    fit_blocks = pairs.groupby("date")[BLOCK].apply(lambda g: len(g.drop_duplicates()))
+    fit_blocks = pairs[["date", *BLOCK]].drop_duplicates().groupby("date").size()
     counts["matched_blocks"] = counts.date.map(fit_blocks).fillna(0).astype(int)
     return pairs, support, counts
 

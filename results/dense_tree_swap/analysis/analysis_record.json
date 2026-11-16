@@ -1,0 +1,12 @@
+{
+  "dense_design_sha256": "87d510754535e2390c999e7d51265ba6a05dac9c10eb1de10bf9618de0580b16",
+  "seed": 20251116,
+  "exchange_points": 5,
+  "output_sha256": {
+    "estimates.csv": "e6574b2b9dd60bea1b6badf037d203c3f97d97a8c752409a1e2219120001e20c",
+    "pair_balance.csv": "ce7d03a48119eb4b222778c103a8c01488a79bef85cabd45afbeb9bc99760b82",
+    "leave_one_block_out.csv": "9ffc9af4f52c5a3ca8809fa06df2845031795b0436612871a079a84bfaf75517",
+    "paired_temperatures.csv": "3ccb0a36f95cd392c74044b7e0fe2ab21b22bf1377f3524c44fee71a0667dc43",
+    "pair_overlap.csv": "91108c6fef589450bbdd32adfd7ff52e7b80cc97ec6f2a8377d8f4529237962d"
+  }
+}

@@ -2,6 +2,35 @@
 
 Use the environment and commands in the [README](../README.md). All code runs from the repository root. The pipeline writes new download caches and intermediate products inside the project. The result paths passed to each script can point to a new directory for comparison against the checked-in outputs.
 
+## Stage 6 Tree-for-rangeland comparison in dense built areas
+
+The design uses the committed Stage 5 annual class counts and the Stage 3 cell-date registry. Preparation verifies the input hashes, checks exact fractions reconstructed from integer pixel counts, and records the support and rank checks before the temperature step. The geographic figures also require the original URA boundary.
+
+```bash
+.venv/bin/python -B scripts/fetch_inputs.py spatial
+.venv/bin/python -B scripts/prepare_dense_tree_swap.py --output .scratch/dense-repro/design
+.venv/bin/python -B scripts/plot_dense_tree_swap.py --design .scratch/dense-repro/design \
+  --output .scratch/dense-repro/figures
+.venv/bin/python -B scripts/analyze_dense_tree_swap.py --design .scratch/dense-repro/design \
+  --output .scratch/dense-repro/analysis
+.venv/bin/python -B scripts/plot_dense_tree_swap.py --analysis .scratch/dense-repro/analysis \
+  --output .scratch/dense-repro/figures
+```
+
+Use `--design results/dense_tree_swap/design` with the temperature command to start from the frozen pairs.
+
+| File | Contents |
+| --- | --- |
+| [Rangeland distributions](../results/dense_tree_swap/design/composition_by_band.csv) | Cell-year denominator, percentiles and counts above the five- and ten-point thresholds by built band. |
+| [Cumulative support by band](../results/dense_tree_swap/design/support_by_band.csv) and [support by date](../results/dense_tree_swap/design/support_by_date.csv) | Lower-tree cell counts at each step, including pair availability and the geography restrictions. |
+| [Dense cell registry](../results/dense_tree_swap/design/dense_cells.csv.gz) and [pair registry](../results/dense_tree_swap/design/pairs.csv) | Deepest support step for each high-built cell-date, ordered endpoints for each selected pair and actual composition gaps. |
+| [Frozen design](../results/dense_tree_swap/design/design_record.json) | Rules, match and model availability, block concentration and input and output checksums. |
+| [Temperature contrasts](../results/dense_tree_swap/analysis/estimates.csv), [balance](../results/dense_tree_swap/analysis/pair_balance.csv) and [omit-one-block results](../results/dense_tree_swap/analysis/leave_one_block_out.csv) | Local contrasts and intervals, realized differences in cover and the estimates after omitting individual geographic blocks. |
+| [Pair overlap](../results/dense_tree_swap/analysis/pair_overlap.csv) | The pair records and weighted contributions shared by or unique to the primary and wider matching designs. |
+| [Paired LST values](../results/dense_tree_swap/analysis/paired_temperatures.csv) and [analysis record](../results/dense_tree_swap/analysis/analysis_record.json) | The two recorded temperatures in each fitted pair and the resampling seed and output checksums. |
+
+[Protocol](DENSE_TREE_SWAP_PROTOCOL.md) · [Results](DENSE_TREE_SWAP_RESULTS.md)
+
 ## Stage 5 tree-for-rangeland substitution
 
 The frozen design supplies the 15-date comparison registry, class fractions and water distances. Use the archived design to reproduce the estimates and figures. To rebuild the design from the original spatial inputs, run the preparation step as well. The preparation script verifies each annual Esri window, fetching missing windows via the Stage 3 loader. The archived SLA GeoJSON fixes the map edition for the water calculation.

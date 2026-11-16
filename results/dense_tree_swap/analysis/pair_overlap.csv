@@ -1,0 +1,5 @@
+case,pair_subset,pairs,blocks,weight_share,matched_mean_c,contribution_c
+dense,shared,35,9,0.988095238,-1.067347397,-1.054640881
+dense,only this design,1,1,0.011904762,2.791358474,0.033230458
+wider_balance,shared,35,9,0.755555556,-0.814948423,-0.615738808
+wider_balance,only this design,9,2,0.244444444,2.870025709,0.701561840

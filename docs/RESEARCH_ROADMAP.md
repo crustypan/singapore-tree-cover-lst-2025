@@ -81,3 +81,9 @@ Run each stage in the independent laboratory-server project. Commit the analysis
 **Question.** Within the same date and nearby area, how does daytime LST differ for ten points more tree cover and ten points less mapped rangeland at a fixed built-area share? How much does that estimate change when the same pairs are adjusted for proximity to the coast and large inland water?
 
 Use annual class counts and the existing overpass registry to find direct support for the exchange. Hold the comparison geography fixed across the models including water distances. Record the remaining support, the two estimates, their paired difference, and sensitivity to tighter matching and the water-distance definition. The protocol and pair registry were committed before fitting temperatures. [Stage 5 protocol](GRASS_TREE_SUBSTITUTION_PROTOCOL.md) · [Results](GRASS_TREE_SUBSTITUTION_RESULTS.md) · [Reproduction](REPRODUCE.md#stage-5-tree-for-rangeland-substitution)
+
+## Stage 6 Tree cover replacing rangeland in dense built areas
+
+**Question.** Across built-share bands, how much of the loss of comparable cells occurs because rangeland is scarce, and how much occurs when requiring a balanced local partner? Does a five-point exchange have enough support to estimate the daytime LST contrast?
+
+Compare rangeland availability in each band, then trace which donor cell-dates have partners as the cover, distance and block requirements are added. Compare the ten-point benchmark to a five-point contrast, with at least 80% built cover at each endpoint for the primary temperature estimate. Record geographic replication and whether the residual adjustment is estimable under spatial resampling. [Stage 6 protocol](DENSE_TREE_SWAP_PROTOCOL.md) · [Results](DENSE_TREE_SWAP_RESULTS.md) · [Reproduction](REPRODUCE.md#stage-6-tree-for-rangeland-comparison-in-dense-built-areas)

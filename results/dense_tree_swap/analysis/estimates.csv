@@ -1,0 +1,9 @@
+case,comparison,built_band,pairs,spatial_pairs,dates,blocks,effective_blocks,model,status,estimate_c_per_5pp,lower_c,upper_c,draws_requested,draws_retained
+dense,5pp,ge80,36,12,14,9,4.958538299,matched,estimated,-1.021410423,-1.850500133,0.158765199,1999.000000000,1999.000000000
+dense,5pp,ge80,36,12,14,9,4.958538299,adjusted,adjustment has fewer than 95% full-rank draws,,,,,
+very_dense,5pp,ge90,32,10,14,8,3.679215768,matched,estimated,-1.173345016,-2.064012223,0.569355363,1999.000000000,1999.000000000
+very_dense,5pp,ge90,32,10,14,8,3.679215768,adjusted,adjustment loses rank after omitting a spatial block,,,,,
+80_to_90,5pp,80to90,4,2,4,2,,matched,fewer than three spatial blocks or two overpasses,,,,,
+80_to_90,5pp,80to90,4,2,4,2,,adjusted,fewer than three spatial blocks or two overpasses,,,,,
+wider_balance,5pp_stage5_balance,ge80,44,14,15,9,4.164524422,matched,estimated,0.085823032,-0.652302221,0.604156879,1999.000000000,1953.000000000
+wider_balance,5pp_stage5_balance,ge80,44,14,15,9,4.164524422,adjusted,estimated,-1.075651984,-1.985335511,1.030899171,1999.000000000,1953.000000000
