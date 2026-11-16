@@ -1,0 +1,3 @@
+case,model,change_c_per_5pp,lower_c,upper_c,paired_draws_retained,omit_with_original_date_weights_c
+dense,matched,0.517383832,-0.346947831,1.680366010,1999,-0.416933024
+wider_balance,matched,-0.589849622,-1.182526764,0.042147850,1999,-0.361597139

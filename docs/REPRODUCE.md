@@ -2,6 +2,37 @@
 
 Use the environment and commands in the [README](../README.md). All code runs from the repository root. The pipeline writes new download caches and intermediate products inside the project. The result paths passed to each script can point to a new directory for comparison against the checked-in outputs.
 
+## Stage 7 Audit of the wider-only dense-area pairs
+
+The Git snapshot contains the raw Landsat and Sentinel-2 digital numbers for the image windows, the transforms and annual labels, and the source manifests. Reproduce the temperature-quality audit, the block omission, and the figures using the committed inputs.
+
+```bash
+base=.scratch/influential-pair-repro
+.venv/bin/python -B scripts/analyze_influential_pairs.py --audit-only --output "$base/quality-only"
+.venv/bin/python -B scripts/analyze_influential_pairs.py --output "$base/analysis"
+.venv/bin/python -B scripts/plot_influential_pairs.py --analysis "$base/analysis" --output "$base/figures"
+```
+
+To regenerate the clipped image snapshot, use the frozen optical choices below. The regeneration uses the original spatial files, the earlier Landsat thermal caches or their source assets, and the unsigned URLs in the manifests. The optional preparation command checks the current Landsat catalog against the frozen product IDs. Running the chip script without `--sentinel-selection` repeats the near-date optical search.
+
+```bash
+.venv/bin/python -B scripts/fetch_inputs.py spatial
+.venv/bin/python -B scripts/prepare_influential_pair_audit.py --output "$base/design"
+.venv/bin/python -B scripts/make_influential_pair_chips.py --design "$base/design" \
+  --sentinel-selection data/snapshot/influential_pair_audit/sentinel_sources.csv \
+  --output "$base/snapshot"
+```
+
+| File | Contents |
+| --- | --- |
+| [Frozen pair IDs](../results/influential_pair_audit/design/pair_registry.csv) and [design record](../results/influential_pair_audit/design/design_record.json) | The nine selected pair observations, original date weights, and the two omitted blocks. |
+| [Landsat assets](../results/influential_pair_audit/design/landsat_sources.csv) and [Sentinel-2 assets](../data/snapshot/influential_pair_audit/sentinel_sources.csv) | Product IDs, timestamps, optical and quality band addresses, scene offsets and reflectance metadata. |
+| [Snapshot record](../data/snapshot/influential_pair_audit/provenance.json) and [image review](../results/influential_pair_audit/image_review/site_notes.csv) | Checksums for the data chips and fixed observations from visual inspection. |
+| [Endpoint QA](../results/influential_pair_audit/analysis/endpoint_quality.csv), [paired QA](../results/influential_pair_audit/analysis/pair_quality.csv) and [optical context](../results/influential_pair_audit/analysis/sentinel_context.csv) | Recreated temperature and coverage, uncertainty, distance to cloud, spectral summaries, and class differences. |
+| [Block omission](../results/influential_pair_audit/analysis/block_omission.csv), [changes](../results/influential_pair_audit/analysis/omission_changes.csv) and [retained records](../results/influential_pair_audit/analysis/omission_retained_pairs.csv) | Estimates before and after dropping both blocks, paired changes and remaining pair IDs. |
+
+[Protocol](INFLUENTIAL_PAIR_AUDIT_PROTOCOL.md) · [Results](INFLUENTIAL_PAIR_AUDIT_RESULTS.md)
+
 ## Stage 6 Tree-for-rangeland comparison in dense built areas
 
 The design uses the committed Stage 5 annual class counts and the Stage 3 cell-date registry. Preparation verifies the input hashes, checks exact fractions reconstructed from integer pixel counts, and records the support and rank checks before the temperature step. The geographic figures also require the original URA boundary.

@@ -87,3 +87,9 @@ Use annual class counts and the existing overpass registry to find direct suppor
 **Question.** Across built-share bands, how much of the loss of comparable cells occurs because rangeland is scarce, and how much occurs when requiring a balanced local partner? Does a five-point exchange have enough support to estimate the daytime LST contrast?
 
 Compare rangeland availability in each band, then trace which donor cell-dates have partners as the cover, distance and block requirements are added. Compare the ten-point benchmark to a five-point contrast, with at least 80% built cover at each endpoint for the primary temperature estimate. Record geographic replication and whether the residual adjustment is estimable under spatial resampling. [Stage 6 protocol](DENSE_TREE_SWAP_PROTOCOL.md) · [Results](DENSE_TREE_SWAP_RESULTS.md) · [Reproduction](REPRODUCE.md#stage-6-tree-for-rangeland-comparison-in-dense-built-areas)
+
+## Stage 7 Audit of influential pairs and block omission
+
+**Question.** What do the original images and temperature quality records show about the Stage 6 wider-only pairs, and how far does the five-point estimate move when both of their blocks are removed?
+
+Freeze the pair and source-product IDs. Inspect the same-overpass Landsat imagery, quality bands and near-date Sentinel-2 context. Report changes in vegetation and built shares alongside optical differences and the original and stricter temperature screens. Exclude both blocks simultaneously from the frozen primary and wider lists, then summarize the retained observations and the paired change in the estimated contrast. [Stage 7 protocol](INFLUENTIAL_PAIR_AUDIT_PROTOCOL.md) · [Results](INFLUENTIAL_PAIR_AUDIT_RESULTS.md) · [Reproduction](REPRODUCE.md#stage-7-audit-of-the-wider-only-dense-area-pairs)

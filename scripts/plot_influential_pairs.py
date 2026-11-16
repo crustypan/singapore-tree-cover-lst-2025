@@ -137,7 +137,9 @@ def summary_figure(analysis, dest):
         ("base", MUTED, "o", -.17, "Original QA"), ("qa4", BLUE, "s", 0, "≤4 K and ≥0.5 km from cloud"),
         ("qa2", GREEN, "^", .17, "≤2 K and ≥0.5 km from cloud"),
     ):
-        ax.scatter(x + offset, cases[f"{name}_per5_c"], label=label, color=color, marker=symbol, s=32, zorder=3)
+        points = cases[f"{name}_per5_c"]
+        ax.scatter(x + offset, points, label=f"{label} ({points.notna().sum()})",
+                   color=color, marker=symbol, s=32, zorder=3)
     ax.set_title("Wider-only pairs under three temperature screens", loc="left", fontweight="bold")
     ax.set_xticks(x, [f"{s}\n{d}" for s, d in zip(cases.site, cases.date)], fontsize=8.1)
     ax.set_ylabel("Temperature gap (°C)")
